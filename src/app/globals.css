@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #483475;  /* deep purple - main brand color */
+    --primary-light: #5B4B8A;  /* lighter purple for nav */
+    --primary-dark: #362658;  /* darker purple for gradient */
+    --accent: #FFFFFF;  /* white for accents */
+  }
+
+  body {
+    @apply bg-[#FFFFFF] text-[#111827];
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn-primary {
+    @apply bg-[#5B4B8A] hover:bg-[#483475] text-white font-bold py-3 px-6 rounded-lg transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-3 px-6 rounded-lg transition-colors;
+  }
+  
+  .section {
+    @apply py-16 md:py-24;
+  }
+  
+  .heading-1 {
+    @apply text-4xl md:text-5xl font-bold mb-6;
+  }
+  
+  .heading-2 {
+    @apply text-3xl md:text-4xl font-bold mb-4;
+  }
+  
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-bold mb-3;
+  }
+}

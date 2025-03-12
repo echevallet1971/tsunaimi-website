@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
     role VARCHAR(255) NOT NULL,
     interest VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
+    phone_number VARCHAR(50),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(50) DEFAULT 'pending',
     processed_at TIMESTAMP WITH TIME ZONE

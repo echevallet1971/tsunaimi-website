@@ -31,6 +31,16 @@ async function testDatabaseConnection() {
          WHERE table_name = 'contact_submissions'`
       );
       console.log('Table columns:', columns.map(c => c.column_name).join(', '));
+
+      // Check if phone_number column exists
+      if (!columns.some(c => c.column_name === 'phone_number')) {
+        console.log('Adding phone_number column...');
+        await query(`
+          ALTER TABLE contact_submissions 
+          ADD COLUMN phone_number VARCHAR(50)
+        `);
+        console.log('✅ phone_number column added');
+      }
     } else {
       console.log('❌ contact_submissions table does not exist');
       console.log('Creating table...');
@@ -44,6 +54,7 @@ async function testDatabaseConnection() {
           role VARCHAR(255) NOT NULL,
           interest VARCHAR(255) NOT NULL,
           message TEXT NOT NULL,
+          phone_number VARCHAR(50),
           created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
           status VARCHAR(50) DEFAULT 'pending',
           processed_at TIMESTAMP WITH TIME ZONE

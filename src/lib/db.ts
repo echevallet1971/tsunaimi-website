@@ -1,3 +1,5 @@
+'use server';
+
 import { Pool, PoolConfig } from 'pg';
 import * as dotenv from 'dotenv';
 
@@ -20,7 +22,7 @@ function getEnvConfig(): PoolConfig {
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
-    password: process.env.POSTGRES_PASSWORD,
+    password: process.env.DB_PASSWORD,
     port: parseInt(process.env.DB_PORT || '5432'),
     ssl: process.env.DB_SSL === 'true',
     // Add some reasonable defaults for a web application

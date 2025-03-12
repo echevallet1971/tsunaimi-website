@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { validateEmail, validatePhoneNumber, formatPhoneNumber } from '@/lib/contact-validation';
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -13,14 +14,28 @@ const initialFormData = {
   company: '',
   role: '',
   interest: '',
-  message: ''
+  message: '',
+  phone_number: ''
 };
+
+// Field validation states
+interface FieldValidation {
+  [key: string]: {
+    isValid: boolean;
+    message: string;
+  };
+}
 
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [fieldValidation, setFieldValidation] = useState<FieldValidation>({});
+
+  // Add ref for error message and first invalid field
+  const errorRef = useRef<HTMLDivElement>(null);
+  const firstInvalidFieldRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(null);
 
   // Reset form when modal is closed
   useEffect(() => {
@@ -28,14 +43,133 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       setFormData(initialFormData);
       setSubmitStatus('idle');
       setErrorMessage('');
+      setFieldValidation({});
     }
   }, [isOpen]);
+
+  // Focus management
+  useEffect(() => {
+    if (submitStatus === 'error') {
+      if (firstInvalidFieldRef.current) {
+        firstInvalidFieldRef.current.focus();
+      } else if (errorRef.current) {
+        errorRef.current.focus();
+      }
+    }
+  }, [submitStatus]);
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'email':
+        return {
+          isValid: validateEmail(value),
+          message: 'Please enter a valid email address (e.g., user@domain.com).'
+        };
+      case 'phone_number':
+        return value ? {
+          isValid: validatePhoneNumber(value),
+          message: 'Please enter a valid phone number (e.g., +1 234 567 8900).'
+        } : { isValid: true, message: '' };
+      default:
+        return {
+          isValid: value.trim().length > 0,
+          message: `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`
+        };
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    
+    // Format phone number as user types
+    if (name === 'phone_number') {
+      const formattedValue = formatPhoneNumber(value);
+      // Only update if the formatting actually changed something
+      // This prevents cursor jumping when user is typing
+      if (formattedValue !== value) {
+        setFormData(prev => ({ ...prev, [name]: formattedValue }));
+      } else {
+        setFormData(prev => ({ ...prev, [name]: value }));
+      }
+      
+      // Show validation state only if user has entered something
+      if (value.trim()) {
+        setFieldValidation(prev => ({
+          ...prev,
+          [name]: validateField(name, value)
+        }));
+      }
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+    
+    // Validate on change for other fields
+    if (name !== 'phone_number' && value.trim() !== '') {
+      setFieldValidation(prev => ({
+        ...prev,
+        [name]: validateField(name, value)
+      }));
+    } else if (value.trim() === '') {
+      // Clear validation state when field is empty
+      setFieldValidation(prev => {
+        const newState = { ...prev };
+        delete newState[name];
+        return newState;
+      });
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFieldValidation(prev => ({
+      ...prev,
+      [name]: validateField(name, value)
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
+
+    // Validate all required fields
+    const validations: FieldValidation = {};
+    let isValid = true;
+    let firstInvalidField: string | null = null;
+
+    ['name', 'email', 'company', 'role', 'interest', 'message'].forEach(field => {
+      const validation = validateField(field, formData[field as keyof typeof formData]);
+      validations[field] = validation;
+      if (!validation.isValid && !firstInvalidField) {
+        firstInvalidField = field;
+        isValid = false;
+      }
+    });
+
+    // Validate phone number if provided
+    if (formData.phone_number) {
+      const phoneValidation = validateField('phone_number', formData.phone_number);
+      validations.phone_number = phoneValidation;
+      if (!phoneValidation.isValid && !firstInvalidField) {
+        firstInvalidField = 'phone_number';
+        isValid = false;
+      }
+    }
+
+    setFieldValidation(validations);
+
+    if (!isValid) {
+      setSubmitStatus('error');
+      setErrorMessage('Please correct the errors in the form.');
+      setIsSubmitting(false);
+      // Focus the first invalid field
+      const element = document.getElementById(firstInvalidField!);
+      if (element) {
+        element.focus();
+      }
+      return;
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -49,6 +183,9 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       const data = await response.json();
 
       if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('Too many requests. Please try again in a few minutes.');
+        }
         throw new Error(data.error || 'Failed to submit form');
       }
 
@@ -67,19 +204,97 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
   // Close handler that resets form
   const handleClose = () => {
     setFormData(initialFormData);
     setSubmitStatus('idle');
     setErrorMessage('');
+    setFieldValidation({});
     onClose();
+  };
+
+  const renderField = (
+    name: string,
+    label: string,
+    type: string = 'text',
+    options?: { required?: boolean; placeholder?: string; component?: 'input' | 'textarea' | 'select'; rows?: number }
+  ) => {
+    const { required = true, placeholder, component = 'input', rows = 4 } = options || {};
+    const validation = fieldValidation[name];
+    const isInvalid = validation && !validation.isValid;
+    const fieldId = `${name}-field`;
+    const errorId = `${name}-error`;
+
+    return (
+      <div>
+        <label htmlFor={fieldId} className="block text-sm font-medium text-[#251C6B] mb-1">
+          {label}
+          {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
+          {!required && <span className="text-[#7057A0] ml-1">(optional)</span>}
+          {name === 'phone_number' && (
+            <span className="ml-2 text-xs text-[#7057A0]">
+              Include country code (e.g., +33 for France)
+            </span>
+          )}
+        </label>
+        {component === 'select' ? (
+          <select
+            id={fieldId}
+            name={name}
+            required={required}
+            value={formData[name as keyof typeof formData]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={`w-full px-3 py-2 border ${isInvalid ? 'border-red-500' : 'border-[#E5E7EB]'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]`}
+            aria-required={required}
+            aria-invalid={isInvalid}
+            aria-describedby={isInvalid ? errorId : undefined}
+          >
+            <option value="">Select your primary interest</option>
+            <option value="Agentic AI Implementation">Agentic AI Implementation</option>
+            <option value="AI Strategy Consulting">AI Strategy Consulting</option>
+            <option value="Custom AI Solutions">Custom AI Solutions</option>
+            <option value="AI Integration">AI Integration</option>
+            <option value="Other">Other</option>
+          </select>
+        ) : component === 'textarea' ? (
+          <textarea
+            id={fieldId}
+            name={name}
+            required={required}
+            value={formData[name as keyof typeof formData]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            rows={rows}
+            placeholder={placeholder}
+            className={`w-full px-3 py-2 border ${isInvalid ? 'border-red-500' : 'border-[#E5E7EB]'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]`}
+            aria-required={required}
+            aria-invalid={isInvalid}
+            aria-describedby={isInvalid ? errorId : undefined}
+          />
+        ) : (
+          <input
+            type={type}
+            id={fieldId}
+            name={name}
+            required={required}
+            value={formData[name as keyof typeof formData]}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder={placeholder}
+            className={`w-full px-3 py-2 border ${isInvalid ? 'border-red-500' : 'border-[#E5E7EB]'} rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]`}
+            aria-required={required}
+            aria-invalid={isInvalid}
+            aria-describedby={isInvalid ? errorId : undefined}
+          />
+        )}
+        {isInvalid && (
+          <p id={errorId} className="mt-1 text-sm text-red-500" role="alert">
+            {validation.message}
+          </p>
+        )}
+      </div>
+    );
   };
 
   if (!isOpen) return null;
@@ -90,16 +305,23 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       <div 
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity z-40"
         onClick={handleClose}
+        aria-hidden="true"
       />
       
       {/* Modal */}
-      <div className="fixed inset-0 z-50 overflow-y-auto">
+      <div 
+        className="fixed inset-0 z-50 overflow-y-auto"
+        role="dialog"
+        aria-labelledby="contact-form-title"
+        aria-modal="true"
+      >
         <div className="flex min-h-full items-center justify-center p-4">
           <div className="relative bg-white rounded-lg shadow-xl max-w-lg w-full">
             {/* Close button */}
             <button 
               onClick={handleClose}
               className="absolute right-4 top-4 text-[#251C6B] hover:text-[#7057A0] transition-colors"
+              aria-label="Close contact form"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -108,11 +330,17 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
             {/* Form content */}
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-[#251C6B] mb-4">Turn AI Into Your Competitive Edge</h2>
+              <h2 id="contact-form-title" className="text-2xl font-bold text-[#251C6B] mb-4">
+                Turn AI Into Your Competitive Edge
+              </h2>
               <p className="text-[#7057A0] mb-6">Tell us about your AI transformation goals.</p>
 
               {submitStatus === 'success' ? (
-                <div className="text-center py-8">
+                <div 
+                  className="text-center py-8"
+                  role="status"
+                  aria-live="polite"
+                >
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
@@ -122,94 +350,32 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                   <p className="text-[#7057A0]">We'll get back to you soon.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-[#251C6B] mb-1">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
-                    />
-                  </div>
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <p className="text-sm text-[#7057A0] mb-4">
+                    Fields marked with <span className="text-red-500">*</span> are required
+                  </p>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-[#251C6B] mb-1">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
-                    />
-                  </div>
+                  {renderField('name', 'Name')}
+                  {renderField('email', 'Email', 'email')}
+                  {renderField('phone_number', 'Phone Number', 'tel', { required: false, placeholder: '+33 1 23 45 67 89' })}
+                  {renderField('company', 'Company')}
+                  {renderField('role', 'Your Role')}
+                  {renderField('interest', 'Primary Interest', 'text', { component: 'select' })}
+                  {renderField('message', 'Tell us about your project', 'text', {
+                    component: 'textarea',
+                    placeholder: 'What are your goals? What challenges are you facing?'
+                  })}
 
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-[#251C6B] mb-1">Company</label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      required
-                      value={formData.company}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="role" className="block text-sm font-medium text-[#251C6B] mb-1">Your Role</label>
-                    <input
-                      type="text"
-                      id="role"
-                      name="role"
-                      required
-                      value={formData.role}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="interest" className="block text-sm font-medium text-[#251C6B] mb-1">Primary Interest</label>
-                    <select
-                      id="interest"
-                      name="interest"
-                      required
-                      value={formData.interest}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
+                  {submitStatus === 'error' && errorMessage && (
+                    <div 
+                      ref={errorRef}
+                      className="text-red-500 text-sm p-3 bg-red-50 rounded-lg"
+                      role="alert"
+                      aria-live="assertive"
+                      tabIndex={-1}
                     >
-                      <option value="">Select your primary interest</option>
-                      <option value="Agentic AI Implementation">Agentic AI Implementation</option>
-                      <option value="AI Strategy Consulting">AI Strategy Consulting</option>
-                      <option value="Custom AI Solutions">Custom AI Solutions</option>
-                      <option value="AI Integration">AI Integration</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-[#251C6B] mb-1">Tell us about your project</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7057A0]"
-                      placeholder="What are your goals? What challenges are you facing?"
-                    ></textarea>
-                  </div>
-
-                  {submitStatus === 'error' && (
-                    <div className="text-red-500 text-sm">{errorMessage}</div>
+                      {errorMessage}
+                    </div>
                   )}
 
                   <button
@@ -218,6 +384,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                     className={`w-full bg-[#7057A0] hover:bg-[#251C6B] text-white font-bold py-3 px-6 rounded-lg transition-colors ${
                       isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
+                    aria-busy={isSubmitting}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>

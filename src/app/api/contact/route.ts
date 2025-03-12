@@ -1,26 +1,52 @@
 import { NextResponse } from 'next/server';
+import { query } from '@/lib/db';
+import { validateContactSubmission, validateRequiredFields } from '@/lib/contact-validation';
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  company: string;
+  role: string;
+  interest: string;
+  message: string;
+}
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = await request.json() as ContactFormData;
     
-    // TODO: Add validation here
-    if (!body.name || !body.email || !body.company || !body.role || !body.interest || !body.message) {
+    // Validate required fields and email format
+    const fieldsValidation = validateRequiredFields(body);
+    if (!fieldsValidation.isValid) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: fieldsValidation.message },
         { status: 400 }
       );
     }
 
-    // TODO: Add database integration here
-    // For now, we'll just log the data
-    console.log('Contact form submission:', body);
+    // Check for recent submissions from this email
+    const submissionValidation = await validateContactSubmission(body.email);
+    if (!submissionValidation.isValid) {
+      return NextResponse.json(
+        { error: submissionValidation.message },
+        { status: 429 } // Too Many Requests
+      );
+    }
 
-    // TODO: Add email notification here
+    // Store in database
+    await query(
+      `INSERT INTO contact_submissions (name, email, company, role, interest, message)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [body.name, body.email, body.company, body.role, body.interest, body.message]
+    );
+
+    // TODO: Add email notification here (future enhancement)
     // This will be replaced with your email service integration
 
     return NextResponse.json(
-      { message: 'Form submitted successfully' },
+      { 
+        message: 'Thank you for your interest in TsunAImi! We have received your inquiry and our team will get back to you shortly.' 
+      },
       { status: 200 }
     );
   } catch (error) {

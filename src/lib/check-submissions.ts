@@ -32,7 +32,7 @@ async function checkSubmissions() {
         
         // Display each submission in a readable format
         submissions.forEach((submission: ContactSubmission, index: number) => {
-            console.log(`Submission #${submissions.length - index}:`);
+            console.log(`Submission #${index + 1}:`);
             console.log('------------------------');
             console.log(`Name: ${submission.name}`);
             console.log(`Email: ${submission.email}`);

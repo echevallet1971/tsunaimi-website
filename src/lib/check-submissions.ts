@@ -18,9 +18,9 @@ async function checkSubmissions() {
     console.log('Fetching contact form submissions...\n');
     
     try {
-        // Query all submissions, ordered by most recent first
+        // Query all submissions, ordered by oldest first
         const submissions = await query<ContactSubmission>(
-            'SELECT * FROM contact_submissions ORDER BY created_at DESC'
+            'SELECT * FROM contact_submissions ORDER BY created_at ASC'
         );
 
         if (submissions.length === 0) {
@@ -32,7 +32,9 @@ async function checkSubmissions() {
         
         // Display each submission in a readable format
         submissions.forEach((submission: ContactSubmission, index: number) => {
-            console.log(`Submission #${index + 1}:`);
+            // Number from N to 1 (most recent submission is #1)
+            const submissionNumber = submissions.length - index;
+            console.log(`Submission #${submissionNumber}:`);
             console.log('------------------------');
             console.log(`Name: ${submission.name}`);
             console.log(`Email: ${submission.email}`);

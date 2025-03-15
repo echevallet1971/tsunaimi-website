@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { validateEmail, validatePhoneNumber, formatPhoneNumber } from '@/lib/contact-validation';
+import { useTranslations } from 'next-intl';
 
 interface ContactFormProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ interface FieldValidation {
 }
 
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
+  const t = useTranslations('contact.form');
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -63,17 +65,17 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       case 'email':
         return {
           isValid: validateEmail(value),
-          message: 'Please enter a valid email address (e.g., user@domain.com).'
+          message: t('validation.email')
         };
       case 'phone_number':
         return value ? {
           isValid: validatePhoneNumber(value),
-          message: 'Please enter a valid phone number (e.g., +1 234 567 8900).'
+          message: t('validation.phone')
         } : { isValid: true, message: '' };
       default:
         return {
           isValid: value.trim().length > 0,
-          message: `${name.charAt(0).toUpperCase() + name.slice(1)} is required.`
+          message: t('validation.required', { field: name })
         };
     }
   };
@@ -161,7 +163,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
     if (!isValid) {
       setSubmitStatus('error');
-      setErrorMessage('Please correct the errors in the form.');
+      setErrorMessage(t('error'));
       setIsSubmitting(false);
       // Focus the first invalid field
       const element = document.getElementById(firstInvalidField!);
@@ -184,9 +186,9 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
 
       if (!response.ok) {
         if (response.status === 429) {
-          throw new Error('Too many requests. Please try again in a few minutes.');
+          throw new Error(t('error_rate_limit'));
         }
-        throw new Error(data.error || 'Failed to submit form');
+        throw new Error(data.error || t('error_submit'));
       }
 
       setSubmitStatus('success');
@@ -198,7 +200,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       }, 3000);
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : 'An error occurred');
+      setErrorMessage(error instanceof Error ? error.message : t('error_unknown'));
     } finally {
       setIsSubmitting(false);
     }
@@ -230,10 +232,10 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
         <label htmlFor={fieldId} className="block text-sm font-medium text-[#251C6B] mb-1">
           {label}
           {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
-          {!required && <span className="text-[#7057A0] ml-1">(optional)</span>}
+          {!required && <span className="text-[#7057A0] ml-1">({t('optional')})</span>}
           {name === 'phone_number' && (
             <span className="ml-2 text-xs text-[#7057A0]">
-              Include country code (e.g., +33 for France)
+              {t('phone_help')}
             </span>
           )}
         </label>
@@ -250,12 +252,12 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
             aria-invalid={isInvalid}
             aria-describedby={isInvalid ? errorId : undefined}
           >
-            <option value="">Select your primary interest</option>
-            <option value="Agentic AI Implementation">Agentic AI Implementation</option>
-            <option value="AI Strategy Consulting">AI Strategy Consulting</option>
-            <option value="Custom AI Solutions">Custom AI Solutions</option>
-            <option value="AI Integration">AI Integration</option>
-            <option value="Other">Other</option>
+            <option value="">{t('select_interest')}</option>
+            <option value="Agentic AI Implementation">{t('interest_agentic')}</option>
+            <option value="AI Strategy Consulting">{t('interest_strategy')}</option>
+            <option value="Custom AI Solutions">{t('interest_custom')}</option>
+            <option value="AI Integration">{t('interest_integration')}</option>
+            <option value="Other">{t('interest_other')}</option>
           </select>
         ) : component === 'textarea' ? (
           <textarea
@@ -331,9 +333,9 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
             {/* Form content */}
             <div className="p-6">
               <h2 id="contact-form-title" className="text-2xl font-bold text-[#251C6B] mb-4">
-                Turn AI Into Your Competitive Edge
+                {t('title')}
               </h2>
-              <p className="text-[#7057A0] mb-6">Tell us about your AI transformation goals.</p>
+              <p className="text-[#7057A0] mb-6">{t('subtitle')}</p>
 
               {submitStatus === 'success' ? (
                 <div 
@@ -346,24 +348,24 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-[#251C6B] mb-2">Thank you!</h3>
-                  <p className="text-[#7057A0]">We'll get back to you soon.</p>
+                  <h3 className="text-xl font-bold text-[#251C6B] mb-2">{t('success')}</h3>
+                  <p className="text-[#7057A0]">{t('success_message')}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <p className="text-sm text-[#7057A0] mb-4">
-                    Fields marked with <span className="text-red-500">*</span> are required
+                    {t('required_fields')}
                   </p>
 
-                  {renderField('name', 'Name')}
-                  {renderField('email', 'Email', 'email')}
-                  {renderField('phone_number', 'Phone Number', 'tel', { required: false, placeholder: '+33 1 23 45 67 89' })}
-                  {renderField('company', 'Company')}
-                  {renderField('role', 'Your Role')}
-                  {renderField('interest', 'Primary Interest', 'text', { component: 'select' })}
-                  {renderField('message', 'Tell us about your project', 'text', {
+                  {renderField('name', t('name'))}
+                  {renderField('email', t('email'), 'email')}
+                  {renderField('phone_number', t('phone'), 'tel', { required: false, placeholder: '+33 1 23 45 67 89' })}
+                  {renderField('company', t('company'))}
+                  {renderField('role', t('role'))}
+                  {renderField('interest', t('interest'), 'text', { component: 'select' })}
+                  {renderField('message', t('message'), 'text', {
                     component: 'textarea',
-                    placeholder: 'What are your goals? What challenges are you facing?'
+                    placeholder: t('message_placeholder')
                   })}
 
                   {submitStatus === 'error' && errorMessage && (
@@ -386,7 +388,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                     }`}
                     aria-busy={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? t('sending') : t('submit')}
                   </button>
                 </form>
               )}

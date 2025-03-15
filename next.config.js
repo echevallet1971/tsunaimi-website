@@ -1,10 +1,12 @@
+const createNextIntlPlugin = require('next-intl/plugin');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    domains: ['localhost'],
   },
   reactStrictMode: true,
   trailingSlash: true,
 }
 
-module.exports = nextConfig 
+module.exports = createNextIntlPlugin('./src/i18n/request.ts')(nextConfig); 

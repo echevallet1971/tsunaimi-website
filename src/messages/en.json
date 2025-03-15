@@ -1,24 +1,50 @@
 {
+  "common": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "language": {
+      "en": "English",
+      "fr": "French"
+    }
+  },
   "home": {
+    "title": "Transform Your Business with AI",
+    "subtitle": "Empowering businesses with cutting-edge AI solutions",
+    "cta": {
+      "title": "Ready to Transform Your Business?",
+      "subtitle": "Let's discuss how AI can drive your success",
+      "button": "Get Started"
+    },
+    "hero_title": "Turn AI Into Your Competitive Edge",
+    "hero_subtitle": "Transforming businesses with Agentic AI",
+    "cta_button": "Talk to Us - See AI in Action",
+    "about_title": "Why TsunAImi?",
+    "about_subtitle": "Most companies know AI is important—but few know how to act on it.",
+    "contact_title": "Ready to transform your business?",
+    "contact_subtitle": "Our mission is to replace PowerPoints with real AI-driven solutions—helping businesses prototype, deploy, and scale Agentic AI in ways that actually make an impact.",
+    "contact_button": "Let's talk about your project",
     "hero": {
       "headline": "You can't unlock AI's power with yesterday's playbook.",
-      "subheadline": "The frameworks are outdated. The mindset hasn't caught up.\nWe're here to fix that.",
+      "subheadline1": "The frameworks are outdated. The mindset hasn't caught up.",
+      "subheadline2": "We're here to fix that.",
       "cta_button": "Talk to Us – See AI in Action"
     },
     "different": {
       "section_title": "What Makes Us Different",
       "headline": "We're not adapting to AI. We are AI-native.",
       "subheadline1": "We work with AI, as a team member — not just a tool.",
-      "subheadline2": "Check our org chart. Half of it is AI.",
-      "subheadline3": "That's not a gimmick. That's how we operate.",
-      "subheadline4": "We believe the only way to understand AI is to work with it every day.",
-      "subheadline5": "That's how we learn faster, build smarter, and stay ahead.",
+      "subheadline2": "That's not a gimmick. That's how we operate.",
+      "subheadline3": "We believe the only way to understand AI is to work with it every day.",
+      "subheadline4": "That's how we learn faster, build smarter, and stay ahead.",
       "cta_button": "See how we work"
     },
     "offerings": {
       "section_title": "What We Offer",
-      "section_headline": "We don't talk about AI. We build with it.",
-      "section_subheadline": "From idea to agent — fast.",
+      "headline": "We don't just talk about AI. We build with it.",
+      "subheadline": "From idea to agent — fast.",
       "service1": {
         "title": "Rapid Use-Case Prototyping",
         "desc": "We turn ideas into working prototypes in days—not months.",
@@ -42,14 +68,53 @@
     },
     "why_us": {
       "section_title": "Why Us",
-      "section_Headline": "We're not here to adapt AI to your old world.\nWe help you build the one that comes next.",
-      "section_Subheadline1": "We don't optimize the past.",
-      "section_Subheadline2": "We prototype the future."
+      "headline1": "We're not here to adapt AI to your old world.",
+      "headline2": "We help you build the one that comes next.",
+      "subheadline1": "We don't optimize the past.",
+      "subheadline2": "We prototype the future."
     },
     "final_cta": {
       "headline": "Ready to build what's next?",
-      "subheadline": "No decks. No delays.\nWe build with you — and we build to deploy, at scale, for impact.",
+      "subheadline1": "No decks. No delays.",
+      "subheadline2": "We build with you — and we build to deploy, at scale, for impact.",
       "button_text": "Contact us"
+    },
+    "footer": {
+      "tagline1": "Built with AI. Deployed for impact.",
+      "tagline2a": "Don't watch the AI wave. Ride it.",
+      "tagline2b": "Follow us on LinkedIn."
+    }
+  },
+  "contact": {
+    "title": "Turn AI Into Your Competitive Edge",
+    "subtitle": "Tell us about your AI transformation goals.",
+    "required_note": "Fields marked with * are required",
+    "field": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number (optional)",
+      "phone_help": "Include country code (e.g., +33 for France)",
+      "company": "Company",
+      "role": "Your Role",
+      "primary_interest": "Primary Interest",
+      "primary_interest_placeholder": "Select your primary interest",
+      "project_description": "Tell us about your project",
+      "project_placeholder": "What are your goals? What challenges are you facing?"
+    },
+    "submit_button": "Send Message",
+    "form": {
+      "validation": {
+        "email": "Please enter a valid email address (e.g., user@domain.com).",
+        "phone": "Please enter a valid phone number (e.g., +1 234 567 8900).",
+        "required": "{field} is required."
+      },
+      "sending": "Sending...",
+      "success": "Thank you!",
+      "success_message": "We'll get back to you soon.",
+      "error": "Please correct the errors in the form.",
+      "error_rate_limit": "Too many requests. Please try again in a few minutes.",
+      "error_submit": "Failed to submit form",
+      "error_unknown": "An error occurred"
     }
   }
 } 

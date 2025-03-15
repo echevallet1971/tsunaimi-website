@@ -1,0 +1,105 @@
+{
+  "common": {
+    "nav": {
+      "home": "Accueil",
+      "about": "À propos",
+      "contact": "Contact"
+    },
+    "language": {
+      "en": "Anglais",
+      "fr": "Français"
+    }
+  },
+  "home": {
+    "hero": {
+      "headline": "Vous ne pouvez pas libérer la puissance de l'IA avec les méthodes d'hier.",
+      "subheadline1": "Les cadres sont obsolètes. Les mentalités ne suivent pas.",
+      "subheadline2": "Nous sommes là pour changer ça.",
+      "cta_button": "Contactez-nous – Voyez l'IA en action"
+    },
+    "different": {
+      "section_title": "Ce qui nous distingue",
+      "headline": "Nous ne nous adaptons pas à l'IA. Nous sommes natifs de l'IA.",
+      "subheadline1": "Nous travaillons avec l'IA comme un membre de l'équipe — pas juste un outil.",
+      "subheadline2": "Ce n'est pas du marketing. C'est notre façon de travailler.",
+      "subheadline3": "Parce que la seule façon de comprendre l'IA, c'est de travailler avec elle au quotidien.",
+      "subheadline4": "C'est comme ça qu'on apprend plus vite, qu'on construit plus malin, et qu'on reste devant.",
+      "cta_button": "Voir comment on bosse"
+    },
+    "offerings": {
+      "section_title": "Ce qu'on fait",
+      "headline": "On ne fait pas que parler d'IA. On construit avec.",
+      "subheadline": "De l'idée à l'agent — vite.",
+      "service1": {
+        "title": "Prototypage rapide de cas d'usage",
+        "desc": "On transforme vos idées en prototypes en quelques jours, pas en quelques mois.",
+        "sub": "On teste vite. On valide vite. On scale ce qui marche."
+      },
+      "service2": {
+        "title": "Design de modèle opérationnel",
+        "desc": "L'IA change votre façon de bosser. On vous aide à changer avec elle.",
+        "sub": "Structure, process, rôles — on repense tout pour un monde d'agents."
+      },
+      "service3": {
+        "title": "Identification des gisements de valeur",
+        "desc": "Tous les cas d'usage ne se valent pas. On identifie là où l'IA fait vraiment la différence.",
+        "sub": "On cible les bons leviers : réduction des coûts, croissance, efficacité."
+      },
+      "service4": {
+        "title": "Systèmes IA agentiques",
+        "desc": "On construit des agents autonomes qui pensent, agissent et s'améliorent.",
+        "sub": "Ils ne vous assistent pas. Ils opèrent."
+      }
+    },
+    "why_us": {
+      "section_title": "Pourquoi nous",
+      "headline1": "On n'est pas là pour adapter l'IA à votre ancien monde.",
+      "headline2": "On est là pour construire le suivant, avec vous.",
+      "subheadline1": "On n'optimise pas le passé.",
+      "subheadline2": "On prototype le futur."
+    },
+    "final_cta": {
+      "headline": "Prêt·e à construire ce qui vient ensuite ?",
+      "subheadline1": "Pas de slides. Pas d'attente.",
+      "subheadline2": "On construit avec vous — pour déployer vite, à l'échelle, et pour créer de l'impact.",
+      "button_text": "Contactez-nous"
+    },
+    "footer": {
+      "tagline1": "Construit avec l'IA. Déployé pour créer de l'impact.",
+      "tagline2a": "Ne regardez pas passer la vague IA. Prenez-la.",
+      "tagline2b": "Suivez-nous sur LinkedIn."
+    }
+  },
+  "contact": {
+    "title": "Faites de l'IA votre avantage compétitif",
+    "subtitle": "Parlez-nous de vos objectifs de transformation IA.",
+    "required_note": "Les champs marqués d'un * sont obligatoires",
+    "field": {
+      "name": "Nom",
+      "email": "Email",
+      "phone": "Numéro de téléphone (optionnel)",
+      "phone_help": "Incluez l'indicatif pays (ex: +33 pour la France)",
+      "company": "Entreprise",
+      "role": "Votre rôle",
+      "primary_interest": "Intérêt principal",
+      "primary_interest_placeholder": "Sélectionnez votre intérêt principal",
+      "project_description": "Parlez-nous de votre projet",
+      "project_placeholder": "Quels sont vos objectifs ? Quels défis rencontrez-vous ?"
+    },
+    "submit_button": "Envoyer le message",
+    "form": {
+      "validation": {
+        "email": "Veuillez entrer une adresse email valide (ex: utilisateur@domaine.com).",
+        "phone": "Veuillez entrer un numéro de téléphone valide (ex: +33 1 23 45 67 89).",
+        "required": "{field} est requis."
+      },
+      "sending": "Envoi en cours...",
+      "success": "Merci !",
+      "success_message": "Nous vous répondrons bientôt.",
+      "error": "Veuillez corriger les erreurs dans le formulaire.",
+      "error_rate_limit": "Trop de tentatives. Veuillez réessayer dans quelques minutes.",
+      "error_submit": "Échec de l'envoi du formulaire",
+      "error_unknown": "Une erreur s'est produite"
+    }
+  }
+} 

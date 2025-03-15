@@ -1,18 +1,22 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function LanguageSwitcher() {
-  const locale = useLocale();
+interface LanguageSwitcherProps {
+  locale: string;
+}
+
+export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
   const pathname = usePathname();
-  const t = useTranslations('common');
+
+  // Remove the current locale from pathname to get the base path
+  const pathnameWithoutLocale = pathname.replace(/^\/[a-zA-Z-]+(?=\/|$)/, '');
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center">
       <Link
-        href={`/en${pathname}`}
+        href={`/en${pathnameWithoutLocale}`}
         className={`px-2 py-1 rounded-md transition-colors ${
           locale === 'en'
             ? 'bg-[#7057A0] text-white'
@@ -21,8 +25,9 @@ export default function LanguageSwitcher() {
       >
         EN
       </Link>
+      <span className="text-[#7057A0] mx-1">/</span>
       <Link
-        href={`/fr${pathname}`}
+        href={`/fr${pathnameWithoutLocale}`}
         className={`px-2 py-1 rounded-md transition-colors ${
           locale === 'fr'
             ? 'bg-[#7057A0] text-white'

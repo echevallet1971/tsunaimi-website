@@ -1,13 +1,60 @@
 'use client';
 
 import Image from "next/image";
-import ContactForm from '../components/ContactForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { useParams } from 'next/navigation';
+import ContactFormWrapper from '../components/ContactFormWrapper';
 
 export default function Home() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [messages, setMessages] = useState<any>(null);
   const t = useTranslations('home');
+  const params = useParams();
+  const locale = params.locale as string;
+
+  // Load messages
+  useEffect(() => {
+    const loadMessages = async () => {
+      try {
+        const msgs = (await import(`../../messages/${locale}.json`)).default;
+        setMessages(msgs);
+      } catch (error) {
+        console.error('Failed to load messages:', error);
+      }
+    };
+    loadMessages();
+  }, [locale]);
+
+  // Debug logging
+  useEffect(() => {
+    console.log('Client-side mount:', {
+      locale,
+      isContactFormOpen,
+      mounted,
+      timestamp: new Date().toISOString()
+    });
+  }, [locale, isContactFormOpen, mounted]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent any interaction before hydration is complete
+  if (!mounted || !messages) {
+    console.log('Server-side render:', {
+      locale,
+      isContactFormOpen,
+      mounted,
+      timestamp: new Date().toISOString()
+    });
+    return null;
+  }
+
+  const handleContactClick = () => {
+    setIsContactFormOpen(true);
+  };
 
   return (
     <div className="min-h-screen">
@@ -40,7 +87,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-8">
                 <button 
-                  onClick={() => setIsContactFormOpen(true)}
+                  onClick={handleContactClick}
                   className="bg-[#7057A0] hover:bg-[#251C6B] text-white text-xl font-bold py-4 px-8 rounded-lg transition-colors"
                 >
                   {t('hero.cta_button')}
@@ -81,7 +128,7 @@ export default function Home() {
               </div>
               <div className="flex justify-center mt-12">
                 <button 
-                  onClick={() => setIsContactFormOpen(true)}
+                  onClick={handleContactClick}
                   className="bg-[#7057A0] hover:bg-[#251C6B] text-white text-xl font-bold py-4 px-8 rounded-lg transition-colors"
                 >
                   {t('different.cta_button')}
@@ -193,7 +240,7 @@ export default function Home() {
               <p>{t('final_cta.subheadline2')}</p>
             </div>
             <button 
-              onClick={() => setIsContactFormOpen(true)}
+              onClick={handleContactClick}
               className="inline-block px-8 py-3 bg-white text-[#251C6B] hover:bg-[#E5E7EB] transition-colors font-bold rounded-lg"
             >
               {t('final_cta.button_text')}
@@ -202,9 +249,11 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactForm 
+      <ContactFormWrapper 
         isOpen={isContactFormOpen}
         onClose={() => setIsContactFormOpen(false)}
+        locale={locale}
+        messages={messages}
       />
     </div>
   );

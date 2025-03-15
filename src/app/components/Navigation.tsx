@@ -1,3 +1,5 @@
+'use client';
+
 import NavigationClient from './NavigationClient';
 
 interface NavigationProps {

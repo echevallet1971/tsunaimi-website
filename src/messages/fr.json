@@ -12,56 +12,56 @@
   },
   "home": {
     "hero": {
-      "headline": "Vous ne pouvez pas libérer la puissance de l'IA avec les méthodes d'hier.",
-      "subheadline1": "Les cadres sont obsolètes. Les mentalités ne suivent pas.",
-      "subheadline2": "Nous sommes là pour changer ça.",
-      "cta_button": "Contactez-nous – Voyez l'IA en action"
+      "headline": "On ne libère pas la puissance de l'IA avec les méthodes d'hier.",
+      "subheadline1": "Les modes de pensée traditionnels ne fonctionnent plus.",
+      "subheadline2": "On peut vous aider à passer à la suite.",
+      "cta_button": "Venez voir comment ça se passe chez nous."
     },
     "different": {
-      "section_title": "Ce qui nous distingue",
-      "headline": "Nous ne nous adaptons pas à l'IA. Nous sommes natifs de l'IA.",
-      "subheadline1": "Nous travaillons avec l'IA comme un membre de l'équipe — pas juste un outil.",
-      "subheadline2": "Ce n'est pas du marketing. C'est notre façon de travailler.",
-      "subheadline3": "Parce que la seule façon de comprendre l'IA, c'est de travailler avec elle au quotidien.",
-      "subheadline4": "C'est comme ça qu'on apprend plus vite, qu'on construit plus malin, et qu'on reste devant.",
-      "cta_button": "Voir comment on bosse"
+      "section_title": "En quoi sommes-nous différent?",
+      "headline": "Nous ne nous adaptons pas à l'IA. Nous l'incarnons.",
+      "subheadline1": "L'IA fait partie intégrante de notre équipe, ce n'est pas juste un outil ou une aide ponctuelle.",
+      "subheadline2": "Ce n'est pas une posture marketing. C'est notre façon de travailler.",
+      "subheadline3": "Parce que la seule manière de vraiment comprendre l'IA, c'est de travailler avec elle. Tous les jours.",
+      "subheadline4": "C'est comme ça qu'on apprend plus vite, qu'on construit plus intelligemment, et qu'on peut vous aider à prendre de l'avance.",
+      "cta_button": "Découvrez notre façon de faire"
     },
     "offerings": {
-      "section_title": "Ce qu'on fait",
-      "headline": "On ne fait pas que parler d'IA. On construit avec.",
-      "subheadline": "De l'idée à l'agent — vite.",
+      "section_title": "Ce qu'on propose",
+      "headline": "On ne parle pas d'IA. On construit avec elle.",
+      "subheadline": "On part d'un besoin. On livre une solution qui vous fait entrer dans l'IA, pour de vrai.",
       "service1": {
         "title": "Prototypage rapide de cas d'usage",
-        "desc": "On transforme vos idées en prototypes en quelques jours, pas en quelques mois.",
-        "sub": "On teste vite. On valide vite. On scale ce qui marche."
+        "desc": "On transforme vos idées en prototypes fonctionnels. En quelques jours, pas en quelques mois.",
+        "sub": "On teste vite. On valide vite. On ne scale que ce qui fonctionne."
       },
       "service2": {
         "title": "Design de modèle opérationnel",
-        "desc": "L'IA change votre façon de bosser. On vous aide à changer avec elle.",
-        "sub": "Structure, process, rôles — on repense tout pour un monde d'agents."
+        "desc": "L'IA transforme votre manière de travailler. On vous aide à évoluer avec.",
+        "sub": "Structure, rôles, process — on les fait évoluer pour que l'IA vienne renforcer vos équipes, pas les remplacer."
       },
       "service3": {
-        "title": "Identification des gisements de valeur",
-        "desc": "Tous les cas d'usage ne se valent pas. On identifie là où l'IA fait vraiment la différence.",
-        "sub": "On cible les bons leviers : réduction des coûts, croissance, efficacité."
+        "title": "Résolution de problèmes réels",
+        "desc": "On ne part pas d'un cas d'usage sur catalogue. On part d'un irritant qui vous concerne.",
+        "sub": "Et on construit une solution qui le fait disparaître. Et que tout le monde veut utiliser."
       },
       "service4": {
-        "title": "Systèmes IA agentiques",
+        "title": "Conception de systèmes multi-agents",
         "desc": "On construit des agents autonomes qui pensent, agissent et s'améliorent.",
-        "sub": "Ils ne vous assistent pas. Ils opèrent."
+        "sub": "Ils ne se contentent pas d'aider. Ils agissent."
       }
     },
     "why_us": {
-      "section_title": "Pourquoi nous",
-      "headline1": "On n'est pas là pour adapter l'IA à votre ancien monde.",
+      "section_title": "Pourquoi nous ?",
+      "headline1": "On n'est pas là pour déployer l'IA dans votre ancien monde.",
       "headline2": "On est là pour construire le suivant, avec vous.",
       "subheadline1": "On n'optimise pas le passé.",
       "subheadline2": "On prototype le futur."
     },
     "final_cta": {
-      "headline": "Prêt·e à construire ce qui vient ensuite ?",
-      "subheadline1": "Pas de slides. Pas d'attente.",
-      "subheadline2": "On construit avec vous — pour déployer vite, à l'échelle, et pour créer de l'impact.",
+      "headline": "L'IA est là. Que vous le vouliez ou non. C'est inévitable.",
+      "subheadline1": "Attendre ne changera rien.",
+      "subheadline2": "Autant en tirer parti. Maintenant.",
       "button_text": "Contactez-nous"
     },
     "footer": {

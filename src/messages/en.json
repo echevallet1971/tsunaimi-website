@@ -38,7 +38,7 @@
       "subheadline1": "We work with AI, as a team member — not just a tool.",
       "subheadline2": "That's not a gimmick. That's how we operate.",
       "subheadline3": "We believe the only way to understand AI is to work with it every day.",
-      "subheadline4": "That's how we learn faster, build smarter, and stay ahead.",
+      "subheadline4": "That's how we learn faster, build smarter, and help you leap ahead.",
       "cta_button": "See how we work"
     },
     "offerings": {
@@ -56,14 +56,14 @@
         "sub": "Structure, workflows, roles—we rethink your ops for an agentic world."
       },
       "service3": {
-        "title": "Value Identification",
-        "desc": "Not all use cases are equal. We map where AI matters.",
-        "sub": "Find the buckets: cost reduction, revenue growth, efficiency gains."
+        "title": "Solving Real Problems",
+        "desc": "We don't start from a catalog of use cases. We start from a friction point that matters to you.",
+        "sub": "Then we build the solution that removes it — and that everyone wants to use."
       },
       "service4": {
-        "title": "Agentic AI Systems",
+        "title": "Multi-Agent System Development",
         "desc": "We build autonomous agents that think, act, and improve.",
-        "sub": "They don't just assist. They operate."
+        "sub": "They don't just assist. They take action."
       }
     },
     "why_us": {
@@ -74,9 +74,9 @@
       "subheadline2": "We prototype the future."
     },
     "final_cta": {
-      "headline": "Ready to build what's next?",
-      "subheadline1": "No decks. No delays.",
-      "subheadline2": "We build with you — and we build to deploy, at scale, for impact.",
+      "headline": "AI is here. Whether you like it or not. It's inevitable.",
+      "subheadline1": "Waiting won't help.",
+      "subheadline2": "Time to turn it into an advantage.",
       "button_text": "Contact us"
     },
     "footer": {

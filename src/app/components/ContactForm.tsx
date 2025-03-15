@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 interface ContactFormProps {
   isOpen: boolean;
   onClose: () => void;
+  locale: string;
 }
 
 const initialFormData = {
@@ -27,17 +28,31 @@ interface FieldValidation {
   };
 }
 
-export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
-  const t = useTranslations('contact.form');
+export default function ContactForm({ isOpen, onClose, locale }: ContactFormProps) {
+  // All hooks must be called at the top level
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldValidation, setFieldValidation] = useState<FieldValidation>({});
-
-  // Add ref for error message and first invalid field
   const errorRef = useRef<HTMLDivElement>(null);
   const firstInvalidFieldRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(null);
+  const t = useTranslations('contact.form');
+
+  // Debug logging
+  useEffect(() => {
+    console.log('ContactForm mount state:', {
+      isOpen,
+      mounted,
+      locale,
+      timestamp: new Date().toISOString()
+    });
+  }, [isOpen, mounted, locale]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset form when modal is closed
   useEffect(() => {
@@ -59,6 +74,28 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
       }
     }
   }, [submitStatus]);
+
+  // Don't render anything until mounted
+  if (!mounted) {
+    console.log('ContactForm server render:', {
+      isOpen,
+      mounted,
+      locale,
+      timestamp: new Date().toISOString()
+    });
+    return null;
+  }
+
+  // Don't render anything if not open
+  if (!isOpen) {
+    console.log('ContactForm closed:', {
+      isOpen,
+      mounted,
+      locale,
+      timestamp: new Date().toISOString()
+    });
+    return null;
+  }
 
   const validateField = (name: string, value: string) => {
     switch (name) {
@@ -299,10 +336,8 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
     );
   };
 
-  if (!isOpen) return null;
-
   return (
-    <>
+    <div className="relative">
       {/* Backdrop */}
       <div 
         className="fixed inset-0 bg-black bg-opacity-50 transition-opacity z-40"
@@ -396,6 +431,6 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 } 

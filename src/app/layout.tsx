@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Logo from "./components/Logo";
-import Navigation from "./components/Navigation";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <Navigation />
-        <main className="pt-16">{children}</main>
+        {children}
         <footer className="bg-white py-8">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

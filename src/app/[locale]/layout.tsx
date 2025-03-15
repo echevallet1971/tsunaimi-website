@@ -1,33 +1,36 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
-import Navigation from '../components/Navigation';
+import NavigationClient from '../components/NavigationClient';
+import FooterWrapper from '../components/FooterWrapper';
 
-export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'fr' }];
+interface LocaleLayoutProps {
+  children: React.ReactNode;
+  params: {
+    locale: string;
+  };
+}
+
+async function getMessages(locale: string) {
+  try {
+    return (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
 }
 
 export default async function LocaleLayout({
   children,
   params: { locale }
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  let messages;
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+}: LocaleLayoutProps) {
+  const messages = await getMessages(locale);
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <div className="min-h-screen">
-        <Navigation locale={locale} />
-        <main className="pt-16">
-          {children}
-        </main>
-      </div>
+      <NavigationClient locale={locale} />
+      <main>
+        {children}
+      </main>
+      <FooterWrapper locale={locale} messages={messages} />
     </NextIntlClientProvider>
   );
 } 

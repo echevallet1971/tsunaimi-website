@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import ContactFormWrapper from '../components/ContactFormWrapper';
+import { RobotIcon, BrainIcon, ClockIcon, RocketIcon } from '../components/Icons';
 
 export default function Home() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
@@ -112,20 +113,44 @@ export default function Home() {
             </div>
 
             <div className="max-w-3xl mx-auto">
-              <div className="border-l-4 border-[#7057A0] pl-8 space-y-4">
-                <p className="text-xl md:text-2xl text-[#111827] md:whitespace-nowrap">
-                  {t('different.subheadline1')}
-                </p>
-                <p className="text-xl md:text-2xl text-[#111827] md:whitespace-nowrap">
-                  {t('different.subheadline2')}
-                </p>
-                <p className="text-xl md:text-2xl text-[#111827] md:whitespace-nowrap">
-                  {t('different.subheadline3')}
-                </p>
-                <p className="text-xl md:text-2xl text-[#111827] md:whitespace-nowrap">
-                  {t('different.subheadline4')}
-                </p>
+              <div className="space-y-8">
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 text-[#7057A0]">
+                    <RobotIcon className="w-full h-full" />
+                  </div>
+                  <p className="text-xl md:text-2xl text-[#111827]">
+                    {t('different.subheadline1')}
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 text-[#7057A0]">
+                    <BrainIcon className="w-full h-full" />
+                  </div>
+                  <p className="text-xl md:text-2xl text-[#111827]">
+                    {t('different.subheadline2')}
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 text-[#7057A0]">
+                    <ClockIcon className="w-full h-full" />
+                  </div>
+                  <p className="text-xl md:text-2xl text-[#111827]">
+                    {t('different.subheadline3')}
+                  </p>
+                </div>
+
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0 w-12 h-12 text-[#7057A0]">
+                    <RocketIcon className="w-full h-full" />
+                  </div>
+                  <p className="text-xl md:text-2xl text-[#111827]">
+                    {t('different.subheadline4')}
+                  </p>
+                </div>
               </div>
+
               <div className="flex justify-center mt-12">
                 <button 
                   onClick={handleContactClick}

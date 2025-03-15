@@ -8,6 +8,13 @@
     "language": {
       "en": "Anglais",
       "fr": "Français"
+    },
+    "footer": {
+      "tagline": "Pas juste prêts pour l'IA. Nés avec.",
+      "connect": "Contact",
+      "wave": "Ne regardez pas passer la vague IA. Surfez-la.",
+      "linkedin": "Suivez-nous sur LinkedIn",
+      "rights": "Tous droits réservés."
     }
   },
   "home": {
@@ -83,6 +90,11 @@
       "role": "Votre rôle",
       "primary_interest": "Intérêt principal",
       "primary_interest_placeholder": "Sélectionnez votre intérêt principal",
+      "interest_curious": "Juste curieux",
+      "interest_conversation": "Besoin d'échanger",
+      "interest_prototype": "Besoin d'un prototype rapide",
+      "interest_scale": "Prêt à passer à l'échelle",
+      "interest_unsure": "Je ne sais pas encore",
       "project_description": "Parlez-nous de votre projet",
       "project_placeholder": "Quels sont vos objectifs ? Quels défis rencontrez-vous ?"
     },
@@ -91,7 +103,7 @@
       "validation": {
         "email": "Veuillez entrer une adresse email valide (ex: utilisateur@domaine.com).",
         "phone": "Veuillez entrer un numéro de téléphone valide (ex: +33 1 23 45 67 89).",
-        "required": "{field} est requis."
+        "required": "{champ} est requis."
       },
       "sending": "Envoi en cours...",
       "success": "Merci !",

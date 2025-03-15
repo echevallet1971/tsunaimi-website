@@ -114,7 +114,9 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
       default:
         return {
           isValid: value.trim().length > 0,
-          message: tv('required', { field: name })
+          message: tv('required', { 
+            [locale === 'fr' ? 'champ' : 'field']: name 
+          })
         };
     }
   };
@@ -292,11 +294,11 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
             aria-describedby={isInvalid ? errorId : undefined}
           >
             <option value="">{tf('primary_interest_placeholder')}</option>
-            <option value="Agentic AI Implementation">{tf('primary_interest')}</option>
-            <option value="AI Strategy Consulting">{tf('primary_interest')}</option>
-            <option value="Custom AI Solutions">{tf('primary_interest')}</option>
-            <option value="AI Integration">{tf('primary_interest')}</option>
-            <option value="Other">{tf('primary_interest')}</option>
+            <option value="Just curious">{tf('interest_curious')}</option>
+            <option value="Want to exchange ideas">{tf('interest_conversation')}</option>
+            <option value="Need rapid prototyping">{tf('interest_prototype')}</option>
+            <option value="Looking to scale">{tf('interest_scale')}</option>
+            <option value="Not sure yet">{tf('interest_unsure')}</option>
           </select>
         ) : component === 'textarea' ? (
           <textarea

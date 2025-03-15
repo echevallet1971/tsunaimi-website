@@ -8,6 +8,13 @@
     "language": {
       "en": "English",
       "fr": "French"
+    },
+    "footer": {
+      "tagline": "Not just AI-ready. AI-native.",
+      "connect": "Connect",
+      "wave": "Don't watch the AI wave. Ride it.",
+      "linkedin": "Follow us on LinkedIn",
+      "rights": "All rights reserved."
     }
   },
   "home": {
@@ -78,11 +85,6 @@
       "subheadline1": "Waiting won't help.",
       "subheadline2": "Time to turn it into an advantage.",
       "button_text": "Contact us"
-    },
-    "footer": {
-      "tagline1": "Built with AI. Deployed for impact.",
-      "tagline2a": "Don't watch the AI wave. Ride it.",
-      "tagline2b": "Follow us on LinkedIn."
     }
   },
   "contact": {
@@ -98,6 +100,11 @@
       "role": "Your Role",
       "primary_interest": "Primary Interest",
       "primary_interest_placeholder": "Select your primary interest",
+      "interest_curious": "Just curious",
+      "interest_conversation": "Want to exchange ideas",
+      "interest_prototype": "Need rapid prototyping",
+      "interest_scale": "Looking to scale",
+      "interest_unsure": "Not sure yet",
       "project_description": "Tell us about your project",
       "project_placeholder": "What are your goals? What challenges are you facing?"
     },

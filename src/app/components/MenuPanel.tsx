@@ -56,41 +56,8 @@ export default function MenuPanel({ isOpen, onClose }: MenuPanelProps) {
               </ul>
             </div>
 
-            {/* Knowledge Hub Section */}
-            <div className="mb-8">
-              <h2 className="text-xl font-semibold text-[#251C6B] mb-4">Knowledge Hub</h2>
-              <ul className="space-y-4">
-                <li>
-                  <a href="/blog" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="/case-studies" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Case Studies
-                  </a>
-                </li>
-                <li>
-                  <a href="/resources" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Resources
-                  </a>
-                </li>
-                <li>
-                  <a href="/insights" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    AI Insights
-                  </a>
-                </li>
-                <li>
-                  <a href="/newsletter" className="flex items-center text-[#7057A0] hover:text-[#251C6B] transition-colors">
-                    <span>Newsletter</span>
-                    <span className="ml-2 px-2 py-1 text-xs bg-[#7057A0] text-white rounded-full">New</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
             {/* Contact Info */}
-            <div className="mt-auto pt-4 border-t border-[#E5E7EB]">
+            <div className="mt-auto">
               <a 
                 href="mailto:contact@tsunaimi.ai"
                 className="inline-flex items-center text-[#7057A0] hover:text-[#251C6B] transition-colors"

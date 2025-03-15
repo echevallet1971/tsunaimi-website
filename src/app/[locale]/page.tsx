@@ -22,7 +22,7 @@ export default function Home() {
             {/* Image on the left */}
             <div className="w-full lg:w-1/2 relative aspect-square lg:aspect-auto lg:h-[600px]">
               <Image
-                src="/assets/images/a-futuristic-scene-with-a-purple-color.jpeg"
+                src="/assets/images/hero1.jpeg"
                 alt="Futuristic AI Scene"
                 fill
                 className="object-cover rounded-2xl"
@@ -97,38 +97,40 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center">
-              <h2 className="heading-2 text-[#251C6B]">{t('offerings.section_title')}</h2>
-              <p className="text-2xl font-semibold text-[#7057A0] mt-4">
+              <h2 className="heading-2 text-[#251C6B] text-3xl md:text-4xl lg:text-5xl font-bold">
+                {t('offerings.section_title')}
+              </h2>
+              <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#7057A0] mt-4">
                 {t('offerings.headline')}
               </p>
-              <p className="text-xl text-[#111827] mt-2">
+              <p className="text-xl md:text-2xl text-[#111827] mt-2">
                 {t('offerings.subheadline')}
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-6 p-6 bg-white rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-[#251C6B]">{t('offerings.service1.title')}</h3>
-                <p className="text-lg text-[#111827]">{t('offerings.service1.desc')}</p>
-                <p className="text-lg text-[#7057A0]">{t('offerings.service1.sub')}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#251C6B]">{t('offerings.service1.title')}</h3>
+                <p className="text-lg md:text-xl text-[#111827]">{t('offerings.service1.desc')}</p>
+                <p className="text-lg md:text-xl text-[#7057A0]">{t('offerings.service1.sub')}</p>
               </div>
 
               <div className="space-y-6 p-6 bg-white rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-[#251C6B]">{t('offerings.service2.title')}</h3>
-                <p className="text-lg text-[#111827]">{t('offerings.service2.desc')}</p>
-                <p className="text-lg text-[#7057A0]">{t('offerings.service2.sub')}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#251C6B]">{t('offerings.service2.title')}</h3>
+                <p className="text-lg md:text-xl text-[#111827]">{t('offerings.service2.desc')}</p>
+                <p className="text-lg md:text-xl text-[#7057A0]">{t('offerings.service2.sub')}</p>
               </div>
 
               <div className="space-y-6 p-6 bg-white rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-[#251C6B]">{t('offerings.service3.title')}</h3>
-                <p className="text-lg text-[#111827]">{t('offerings.service3.desc')}</p>
-                <p className="text-lg text-[#7057A0]">{t('offerings.service3.sub')}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#251C6B]">{t('offerings.service3.title')}</h3>
+                <p className="text-lg md:text-xl text-[#111827]">{t('offerings.service3.desc')}</p>
+                <p className="text-lg md:text-xl text-[#7057A0]">{t('offerings.service3.sub')}</p>
               </div>
 
               <div className="space-y-6 p-6 bg-white rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold text-[#251C6B]">{t('offerings.service4.title')}</h3>
-                <p className="text-lg text-[#111827]">{t('offerings.service4.desc')}</p>
-                <p className="text-lg text-[#7057A0]">{t('offerings.service4.sub')}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#251C6B]">{t('offerings.service4.title')}</h3>
+                <p className="text-lg md:text-xl text-[#111827]">{t('offerings.service4.desc')}</p>
+                <p className="text-lg md:text-xl text-[#7057A0]">{t('offerings.service4.sub')}</p>
               </div>
             </div>
           </div>
@@ -141,36 +143,37 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               {/* Content on the left */}
-              <div className="w-full lg:w-1/2 space-y-16 text-center lg:text-left">
+              <div className="w-full lg:w-1/2 space-y-12 text-center lg:text-left">
                 <h2 className="heading-2 text-[#251C6B] text-3xl md:text-4xl lg:text-5xl font-bold">
                   {t('why_us.section_title')}
                 </h2>
                 
                 <div className="space-y-4">
-                  <p className="text-xl md:text-2xl lg:text-3xl text-[#111827] leading-[1.4] md:whitespace-nowrap">
+                  <p className="text-xl md:text-2xl lg:text-3xl text-[#111827] leading-[1.4]">
                     {t('why_us.headline1')}
                   </p>
-                  <p className="text-xl md:text-2xl lg:text-3xl text-[#111827] leading-[1.4] md:whitespace-nowrap">
+                  <p className="text-xl md:text-2xl lg:text-3xl text-[#111827] leading-[1.4]">
                     {t('why_us.headline2')}
                   </p>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#7057A0] leading-[1.4] md:whitespace-nowrap">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#7057A0] leading-[1.4]">
                     {t('why_us.subheadline1')}
                   </p>
-                  <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#7057A0] leading-[1.4] md:whitespace-nowrap">
+                  <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#7057A0] leading-[1.4]">
                     {t('why_us.subheadline2')}
                   </p>
                 </div>
               </div>
               {/* Image on the right */}
-              <div className="w-full lg:w-1/2 relative aspect-square lg:aspect-auto lg:h-[600px]">
+              <div className="w-full lg:w-1/2 relative aspect-[3/4] lg:aspect-[2/3]">
                 <Image
-                  src="/assets/images/a-futuristic-image-of-a-startup-working.jpeg"
+                  src="/assets/images/whyus1.jpeg"
                   alt="Futuristic Startup Working Scene"
                   fill
                   className="object-cover rounded-2xl"
-                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -182,8 +185,10 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-b from-[#7057A0] to-[#251C6B]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="heading-2 text-white mb-8">{t('final_cta.headline')}</h2>
-            <div className="text-xl text-[#E5E7EB] mb-8 space-y-2">
+            <h2 className="heading-2 text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-8">
+              {t('final_cta.headline')}
+            </h2>
+            <div className="text-xl md:text-2xl text-[#E5E7EB] mb-8 space-y-2">
               <p>{t('final_cta.subheadline1')}</p>
               <p>{t('final_cta.subheadline2')}</p>
             </div>

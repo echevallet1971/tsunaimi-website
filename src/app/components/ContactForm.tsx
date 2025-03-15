@@ -38,7 +38,9 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
   const [fieldValidation, setFieldValidation] = useState<FieldValidation>({});
   const errorRef = useRef<HTMLDivElement>(null);
   const firstInvalidFieldRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(null);
-  const t = useTranslations('contact.form');
+  const t = useTranslations('contact');
+  const tf = useTranslations('contact.field');
+  const tv = useTranslations('contact.form.validation');
 
   // Debug logging
   useEffect(() => {
@@ -102,17 +104,17 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
       case 'email':
         return {
           isValid: validateEmail(value),
-          message: t('validation.email')
+          message: tv('email')
         };
       case 'phone_number':
         return value ? {
           isValid: validatePhoneNumber(value),
-          message: t('validation.phone')
+          message: tv('phone')
         } : { isValid: true, message: '' };
       default:
         return {
           isValid: value.trim().length > 0,
-          message: t('validation.required', { field: name })
+          message: tv('required', { field: name })
         };
     }
   };
@@ -200,7 +202,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
 
     if (!isValid) {
       setSubmitStatus('error');
-      setErrorMessage(t('error'));
+      setErrorMessage(t('form.error'));
       setIsSubmitting(false);
       // Focus the first invalid field
       const element = document.getElementById(firstInvalidField!);
@@ -223,9 +225,9 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
 
       if (!response.ok) {
         if (response.status === 429) {
-          throw new Error(t('error_rate_limit'));
+          throw new Error(t('form.error_rate_limit'));
         }
-        throw new Error(data.error || t('error_submit'));
+        throw new Error(data.error || t('form.error_submit'));
       }
 
       setSubmitStatus('success');
@@ -237,7 +239,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
       }, 3000);
     } catch (error) {
       setSubmitStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : t('error_unknown'));
+      setErrorMessage(error instanceof Error ? error.message : t('form.error_unknown'));
     } finally {
       setIsSubmitting(false);
     }
@@ -269,10 +271,10 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
         <label htmlFor={fieldId} className="block text-sm font-medium text-[#251C6B] mb-1">
           {label}
           {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
-          {!required && <span className="text-[#7057A0] ml-1">({t('optional')})</span>}
+          {!required && <span className="text-[#7057A0] ml-1">({t('required_note')})</span>}
           {name === 'phone_number' && (
             <span className="ml-2 text-xs text-[#7057A0]">
-              {t('phone_help')}
+              {tf('phone_help')}
             </span>
           )}
         </label>
@@ -289,12 +291,12 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
             aria-invalid={isInvalid}
             aria-describedby={isInvalid ? errorId : undefined}
           >
-            <option value="">{t('select_interest')}</option>
-            <option value="Agentic AI Implementation">{t('interest_agentic')}</option>
-            <option value="AI Strategy Consulting">{t('interest_strategy')}</option>
-            <option value="Custom AI Solutions">{t('interest_custom')}</option>
-            <option value="AI Integration">{t('interest_integration')}</option>
-            <option value="Other">{t('interest_other')}</option>
+            <option value="">{tf('primary_interest_placeholder')}</option>
+            <option value="Agentic AI Implementation">{tf('primary_interest')}</option>
+            <option value="AI Strategy Consulting">{tf('primary_interest')}</option>
+            <option value="Custom AI Solutions">{tf('primary_interest')}</option>
+            <option value="AI Integration">{tf('primary_interest')}</option>
+            <option value="Other">{tf('primary_interest')}</option>
           </select>
         ) : component === 'textarea' ? (
           <textarea
@@ -383,24 +385,24 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-[#251C6B] mb-2">{t('success')}</h3>
-                  <p className="text-[#7057A0]">{t('success_message')}</p>
+                  <h3 className="text-xl font-bold text-[#251C6B] mb-2">{t('form.success')}</h3>
+                  <p className="text-[#7057A0]">{t('form.success_message')}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <p className="text-sm text-[#7057A0] mb-4">
-                    {t('required_fields')}
+                    {t('required_note')}
                   </p>
 
-                  {renderField('name', t('name'))}
-                  {renderField('email', t('email'), 'email')}
-                  {renderField('phone_number', t('phone'), 'tel', { required: false, placeholder: '+33 1 23 45 67 89' })}
-                  {renderField('company', t('company'))}
-                  {renderField('role', t('role'))}
-                  {renderField('interest', t('interest'), 'text', { component: 'select' })}
-                  {renderField('message', t('message'), 'text', {
+                  {renderField('name', tf('name'))}
+                  {renderField('email', tf('email'), 'email')}
+                  {renderField('phone_number', tf('phone'), 'tel', { required: false, placeholder: '+33 1 23 45 67 89' })}
+                  {renderField('company', tf('company'))}
+                  {renderField('role', tf('role'))}
+                  {renderField('interest', tf('primary_interest'), 'text', { component: 'select' })}
+                  {renderField('message', tf('project_description'), 'text', {
                     component: 'textarea',
-                    placeholder: t('message_placeholder')
+                    placeholder: tf('project_placeholder')
                   })}
 
                   {submitStatus === 'error' && errorMessage && (
@@ -423,7 +425,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
                     }`}
                     aria-busy={isSubmitting}
                   >
-                    {isSubmitting ? t('sending') : t('submit')}
+                    {isSubmitting ? t('form.sending') : t('submit_button')}
                   </button>
                 </form>
               )}

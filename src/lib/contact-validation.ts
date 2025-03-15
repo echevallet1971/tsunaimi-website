@@ -1,38 +1,3 @@
-import { query } from './db';
-
-interface ValidationResult {
-    isValid: boolean;
-    message?: string;
-}
-
-export async function validateContactSubmission(email: string): Promise<ValidationResult> {
-    try {
-        // Check if there's a recent submission from this email (within last 5 minutes)
-        const recentSubmission = await query<{ count: string }>(
-            `SELECT COUNT(*) as count 
-             FROM contact_submissions 
-             WHERE email = $1 
-             AND created_at > NOW() - INTERVAL '5 minutes'`,
-            [email]
-        );
-
-        if (parseInt(recentSubmission[0].count) > 0) {
-            return {
-                isValid: false,
-                message: 'We have received your previous inquiry and our team will get back to you shortly.'
-            };
-        }
-
-        return { isValid: true };
-    } catch (error) {
-        console.error('Error validating contact submission:', error);
-        return {
-            isValid: false,
-            message: 'An error occurred while validating your submission. Please try again.'
-        };
-    }
-}
-
 // Client-side validation utilities
 export const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,12 +11,10 @@ export const formatPhoneNumber = (value: string): string => {
 };
 
 export const validatePhoneNumber = (phone: string): boolean => {
-    // Remove all non-digit characters except +
-    const cleaned = phone.replace(/[^\d+]/g, '');
-    
-    // Must start with + and country code, followed by 6-15 digits
-    // This covers most international formats
-    return /^\+\d{1,4}\d{6,15}$/.test(cleaned);
+    // Basic international phone number validation
+    // Allows for country codes and common separators
+    const phoneRegex = /^\+?[\d\s-()]{10,}$/;
+    return phoneRegex.test(phone);
 };
 
 export function validateRequiredFields(data: {

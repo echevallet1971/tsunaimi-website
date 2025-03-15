@@ -1,0 +1,55 @@
+{
+  "home": {
+    "hero": {
+      "headline": "You can't unlock AI's power with yesterday's playbook.",
+      "subheadline": "The frameworks are outdated. The mindset hasn't caught up.\nWe're here to fix that.",
+      "cta_button": "Talk to Us – See AI in Action"
+    },
+    "different": {
+      "section_title": "What Makes Us Different",
+      "headline": "We're not adapting to AI. We are AI-native.",
+      "subheadline1": "We work with AI, as a team member — not just a tool.",
+      "subheadline2": "Check our org chart. Half of it is AI.",
+      "subheadline3": "That's not a gimmick. That's how we operate.",
+      "subheadline4": "We believe the only way to understand AI is to work with it every day.",
+      "subheadline5": "That's how we learn faster, build smarter, and stay ahead.",
+      "cta_button": "See how we work"
+    },
+    "offerings": {
+      "section_title": "What We Offer",
+      "section_headline": "We don't talk about AI. We build with it.",
+      "section_subheadline": "From idea to agent — fast.",
+      "service1": {
+        "title": "Rapid Use-Case Prototyping",
+        "desc": "We turn ideas into working prototypes in days—not months.",
+        "sub": "Test fast. Validate fast. Scale only what sticks."
+      },
+      "service2": {
+        "title": "Operating Model Design",
+        "desc": "AI changes how you work. We help you change with it.",
+        "sub": "Structure, workflows, roles—we rethink your ops for an agentic world."
+      },
+      "service3": {
+        "title": "Value Identification",
+        "desc": "Not all use cases are equal. We map where AI matters.",
+        "sub": "Find the buckets: cost reduction, revenue growth, efficiency gains."
+      },
+      "service4": {
+        "title": "Agentic AI Systems",
+        "desc": "We build autonomous agents that think, act, and improve.",
+        "sub": "They don't just assist. They operate."
+      }
+    },
+    "why_us": {
+      "section_title": "Why Us",
+      "section_Headline": "We're not here to adapt AI to your old world.\nWe help you build the one that comes next.",
+      "section_Subheadline1": "We don't optimize the past.",
+      "section_Subheadline2": "We prototype the future."
+    },
+    "final_cta": {
+      "headline": "Ready to build what's next?",
+      "subheadline": "No decks. No delays.\nWe build with you — and we build to deploy, at scale, for impact.",
+      "button_text": "Contact us"
+    }
+  }
+} 

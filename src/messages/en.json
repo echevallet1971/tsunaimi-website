@@ -170,6 +170,53 @@
         "line1": "We don't update yesterday's playbook.",
         "line2": "We write a new one, built on new logic, powered by AI."
       }
+    },
+    "ourstory": {
+      "title": "Our story",
+      "block1": {
+        "line1": "I spent 25 years in consulting.",
+        "line2": "I knew how to talk strategy, sell ideas, build slides, pitch emerging tech."
+      },
+      "block2": {
+        "line1": "But I also saw the disconnect:",
+        "line2": "between the real value delivered and what clients were paying for.",
+        "line3": "Too much packaging. Too little outcome.",
+        "line4": "Too many meetings. Not enough movement."
+      },
+      "block3": {
+        "line1": "When GenAI arrived, I pivoted — like many — from the Metaverse hype to this new wave.",
+        "line2": "I spent months trying to find corporate use cases that actually mattered.",
+        "line3": "It was hard. Messy. Often underwhelming."
+      },
+      "block4": {
+        "line1": "Then came Agentic AI — and it hit me."
+      },
+      "block5": {
+        "line1": "GenAI augments individuals.",
+        "line2": "Agentic AI has the power to disrupt entire industries."
+      },
+      "block6": {
+        "line1": "That's when everything shifted.",
+        "line2": "I realized I couldn't understand it from the outside — I had to build from within.",
+        "line3": "So I rolled up my sleeves and started learning to code."
+      },
+      "block7": {
+        "line1": "Seven days later, I was coding faster than I ever built slides.",
+        "line2": "Because I wasn't alone — I was working with a team of AI agents, built in days, moving at full speed."
+      },
+      "block8": {
+        "line1": "At first, it felt abstract. The idea was still forming.",
+        "line2": "But the moment clarity landed, everything accelerated.",
+        "line3": "We needed a name, a site, a story, a team — and it all came together."
+      },
+      "block9": {
+        "line1": "This is just the beginning — but it's already everything I hoped for.",
+        "line2": "A place where the boring stuff gets delegated to something (or someone) that does it better than I ever could."
+      },
+      "block10": {
+        "line1": "We're riding the wave — and we're convinced it's for the better.",
+        "line2": "Come ride with us."
+      }
     }
   }
 } 

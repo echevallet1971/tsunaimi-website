@@ -5,7 +5,7 @@
       "about": "À propos",
       "contact": "Contact",
       "about_submenu": {
-        "manifesto": "Notre Manifeste",
+        "manifesto": "Manifeste",
         "story": "Notre Histoire",
         "team": "L'équipe"
       }
@@ -121,43 +121,44 @@
   },
   "aboutus": {
     "manifesto": {
-      "title": "Aucune croyance. Aucun blabla. Juste du concret qui fonctionne.",
+      "page_title": "Manifeste TsunAImi",
+      "title": "Pas de croyances. Pas de blabla. Juste du concret qui fonctionne.",
       "block1": {
-        "line1": "On n'est pas là pour suivre la mode de l'IA.",
-        "line2": "On est là parce qu'on sait que le système est cassé — et qu'on ne va pas attendre qu'il se répare."
+        "line1": "On n'est pas là pour suivre la vague de l'IA.",
+        "line2": "On est là parce que les meilleures pratiques d'hier freinent l'élan de demain."
       },
       "block2": {
-        "line1": "Le consulting est trop lent.",
-        "line2": "Trop prudent. Trop lourd. Trop doué pour dire des choses intelligentes qui ne mènent à rien.",
-        "line3": "Vous n'avez pas besoin d'un énième PowerPoint.",
-        "line4": "Vous avez besoin de systèmes. D'agents. De résultats concrets."
+        "line1": "À force de process et de jolies phrases, le conseil s'enlise.",
+        "line2": "Trop prudent. Incapable de se réinventer.",
+        "line3": "Vous n'avez pas besoin d'une nième présentation PowerPoint.",
+        "line4": "Vous avez besoin de concret. De systèmes qui tournent. D'un impact réel."
       },
       "block3": {
-        "line1": "C'est exactement ce que fait TsunAImi.",
+        "line1": "TsunAImi existe pour ça.",
         "line2": "On ne parle pas de transformation — on la construit.",
-        "line3": "On ne vend pas des journées — on livre du momentum.",
-        "line4": "On ne promet pas une expertise — on la déploie, avec des bots qui livrent plus vite que des équipes entières."
+        "line3": "On ne vend pas des slides — on crée du mouvement.",
+        "line4": "On ne se contente pas de promettre une expertise — on la déploie, avec des agents IA qui livrent plus vite que n'importe quelle équipe."
       },
       "block4": {
-        "line1": "L'IA n'a pas juste changé les règles du jeu.",
-        "line2": "Elle a réécrit les règles.",
-        "line3": "Elle nous a réécrits, nous."
+        "line1": "L'IA n'a pas seulement changé les règles du jeu.",
+        "line2": "Elle les a réécrites.",
+        "line3": "On a été obligés de se réinventer. De se transformer. Pour s'adapter."
       },
       "block5": {
-        "line1": "On a été transformés — pas en théorie, mais en pratique.",
-        "line2": "On est augmentés. Plus rapides. Plus précis. Plus capables.",
-        "line3": "Et c'est ça qu'on propose : une voie claire, pour ceux qui veulent avancer."
+        "line1": "Pas par la théorie, mais en construisant, testant, apprenant.",
+        "line2": "On s'est \"augmenté\". On en fait plus. Mieux.",
+        "line3": "Et c'est ce qu'on propose : une voie claire — pour celles et ceux qui veulent rattraper le train, garder le rythme ou prendre de l'avance."
       },
       "block6": {
         "line1": "TsunAImi n'est pas une agence.",
-        "line2": "Ce n'est pas un cabinet de conseil.",
+        "line2": "Ni un cabinet de conseil.",
         "line3": "C'est une rupture.",
         "line4": "Une reconstruction.",
-        "line5": "Une vraie réponse à un système à bout de souffle."
+        "line5": "Une réponse concrète à un système qui n'est plus taillé pour ce qui arrive."
       },
       "block7": {
-        "line1": "On ne met pas à jour les anciens modèles.",
-        "line2": "On en écrit un nouveau — en code."
+        "line1": "On ne met pas à jour l'ancien modèle.",
+        "line2": "On en écrit un nouveau — fondé sur une nouvelle logique, tiré par l'IA."
       }
     }
   }

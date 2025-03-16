@@ -131,22 +131,23 @@
   },
   "aboutus": {
     "manifesto": {
+      "page_title": "TsunAImi Manifesto",
       "title": "No beliefs. No fluff. Just work that works.",
       "block1": {
-        "line1": "We're not here to join the AI trend.",
-        "line2": "We're here because we've seen how broken the system is — and we're done waiting."
+        "line1": "We're not here to ride the AI hype.",
+        "line2": "We're here because yesterday's best practices are slowing down tomorrow's momentum."
       },
       "block2": {
-        "line1": "Consulting is too slow.",
-        "line2": "Too safe. Too bloated. Too good at saying smart things that lead nowhere.",
+        "line1": "Drowning in process and polished talk, consulting is stuck.",
+        "line2": "Too cautious. Unable to reinvent itself.",
         "line3": "You don't need another pitch deck.",
-        "line4": "You need working systems. Working agents. Working impact."
+        "line4": "You need working systems. Working tech. Working impact."
       },
       "block3": {
         "line1": "That's what TsunAImi is here to do.",
         "line2": "We don't talk transformation — we build it.",
         "line3": "We don't sell billable days — we deliver momentum.",
-        "line4": "We don't promise expertise — we deploy it, through bots that ship faster than teams ever could."
+        "line4": "We don't just promise expertise. We deploy it, with AI agents that ship faster than teams ever could."
       },
       "block4": {
         "line1": "AI didn't just change the game.",
@@ -154,20 +155,20 @@
         "line3": "It rewrote us."
       },
       "block5": {
-        "line1": "We've been transformed — not by theory, but by doing.",
+        "line1": "We've been transformed. Not by theory, but by building, testing, learning.",
         "line2": "We're augmented. Faster. Sharper. More capable than ever.",
-        "line3": "And that's what we offer: a way forward, for those who are ready to move."
+        "line3": "And that's what we offer: a way forward, for anyone ready to catch up, keep up, or leap ahead."
       },
       "block6": {
         "line1": "TsunAImi is not an agency.",
         "line2": "Not a consultancy.",
         "line3": "It's a rupture.",
         "line4": "A rebuild.",
-        "line5": "A real answer to a system that no longer works."
+        "line5": "A real answer to a system no longer built for what's coming."
       },
       "block7": {
         "line1": "We don't update yesterday's playbook.",
-        "line2": "We write a new one — in code."
+        "line2": "We write a new one, built on new logic, powered by AI."
       }
     }
   }

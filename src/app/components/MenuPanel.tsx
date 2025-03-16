@@ -18,6 +18,10 @@ interface MenuPanelProps {
 }
 
 export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProps) {
+  const handleLinkClick = () => {
+    onClose();
+  };
+
   return (
     <>
       {/* Backdrop */}
@@ -49,12 +53,16 @@ export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProp
           <div className="flex-1 px-8 py-4 overflow-y-auto">
             {navigation.map((item) => (
               item.submenu ? (
-                <div key={item.name} className="mb-8">
-                  <h2 className="text-xl font-semibold text-[#251C6B] mb-4">{item.name}</h2>
-                  <ul className="space-y-4">
+                <div key={item.name} className="mb-4">
+                  <h2 className="text-xl font-semibold text-[#251C6B] mb-2">{item.name}</h2>
+                  <ul className="space-y-2">
                     {item.submenu.map((subitem) => (
                       <li key={subitem.name}>
-                        <Link href={subitem.href} className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
+                        <Link 
+                          href={subitem.href} 
+                          className="text-[#7057A0] hover:text-[#251C6B] transition-colors block"
+                          onClick={handleLinkClick}
+                        >
                           {subitem.name}
                         </Link>
                       </li>
@@ -62,8 +70,12 @@ export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProp
                   </ul>
                 </div>
               ) : (
-                <div key={item.name} className="mb-8">
-                  <Link href={item.href} className="text-xl font-semibold text-[#251C6B] hover:text-[#7057A0] transition-colors block">
+                <div key={item.name} className="mb-4">
+                  <Link 
+                    href={item.href} 
+                    className="text-xl font-semibold text-[#251C6B] hover:text-[#7057A0] transition-colors block"
+                    onClick={handleLinkClick}
+                  >
                     {item.name}
                   </Link>
                 </div>
@@ -71,10 +83,11 @@ export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProp
             ))}
 
             {/* Contact Info */}
-            <div className="mt-auto">
+            <div className="mt-4">
               <a 
                 href="mailto:contact@tsunaimi.ai"
                 className="inline-flex items-center text-[#7057A0] hover:text-[#251C6B] transition-colors"
+                onClick={handleLinkClick}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />

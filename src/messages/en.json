@@ -226,6 +226,9 @@
         "line3": "Some of us are human. Some are systems.",
         "line4": "All of us are here to get things done. Faster, better, and with less friction."
       },
+      "placeholder": {
+        "image": "Picture to come"
+      },
       "members": {
         "eric": {
           "name": "Founder & CEO — Eric",

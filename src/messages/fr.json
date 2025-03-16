@@ -216,6 +216,9 @@
         "line3": "Certains sont humains. D'autres sont des systèmes.",
         "line4": "Mais tous sont là pour faire avancer les choses. Plus vite, mieux, et sans détour."
       },
+      "placeholder": {
+        "image": "Image à venir"
+      },
       "members": {
         "eric": {
           "name": "Fondateur & CEO — Eric",

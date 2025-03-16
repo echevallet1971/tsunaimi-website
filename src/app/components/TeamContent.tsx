@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Logo from './Logo';
 
 export default function TeamContent() {
   const t = useTranslations('aboutus.team');
@@ -18,7 +19,7 @@ export default function TeamContent() {
         {/* Image placeholder */}
         <div className="w-32 md:w-40 aspect-square bg-gradient-to-br from-[#7057A0]/10 to-[#251C6B]/10 rounded-2xl overflow-hidden relative">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#7057A0] to-[#251C6B]" />
+            <p className="text-sm text-[#251C6B]">{t('placeholder.image')}</p>
           </div>
         </div>
         
@@ -45,7 +46,10 @@ export default function TeamContent() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="h-48 bg-gradient-to-b from-[#7057A0] to-[#251C6B] flex items-center justify-center pt-14">
+      <div className="h-48 bg-gradient-to-b from-[#7057A0] to-[#251C6B] flex items-center justify-center pt-14 relative">
+        <div className="absolute top-4 left-4">
+          <Logo variant="full" />
+        </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
           {t('title')}
         </h1>

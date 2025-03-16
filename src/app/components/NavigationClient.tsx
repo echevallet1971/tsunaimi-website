@@ -27,7 +27,7 @@ export default function NavigationClient({ locale, navigation, isMenuOpen, onMen
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <Logo variant="symbol" />
+              <Logo variant="full" />
             </Link>
           </div>
           <div className="flex items-center gap-4">

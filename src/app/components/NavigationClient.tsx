@@ -26,7 +26,7 @@ export default function NavigationClient({ locale, navigation, isMenuOpen, onMen
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href={`/${locale}`} className="flex items-center">
               <Logo variant="full" />
             </Link>
           </div>

@@ -2,6 +2,7 @@
 const withNextIntl = require('next-intl/plugin')();
 
 const nextConfig = {
+  output: 'export',
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: true,
   },
   reactStrictMode: true,
   trailingSlash: true,

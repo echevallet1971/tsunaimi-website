@@ -3,7 +3,12 @@
     "nav": {
       "home": "Accueil",
       "about": "À propos",
-      "contact": "Contact"
+      "contact": "Contact",
+      "about_submenu": {
+        "manifesto": "Notre Manifeste",
+        "story": "Notre Histoire",
+        "team": "L'équipe"
+      }
     },
     "language": {
       "en": "Anglais",
@@ -112,6 +117,48 @@
       "error_rate_limit": "Trop de tentatives. Veuillez réessayer dans quelques minutes.",
       "error_submit": "Échec de l'envoi du formulaire",
       "error_unknown": "Une erreur s'est produite"
+    }
+  },
+  "aboutus": {
+    "manifesto": {
+      "title": "Aucune croyance. Aucun blabla. Juste du concret qui fonctionne.",
+      "block1": {
+        "line1": "On n'est pas là pour suivre la mode de l'IA.",
+        "line2": "On est là parce qu'on sait que le système est cassé — et qu'on ne va pas attendre qu'il se répare."
+      },
+      "block2": {
+        "line1": "Le consulting est trop lent.",
+        "line2": "Trop prudent. Trop lourd. Trop doué pour dire des choses intelligentes qui ne mènent à rien.",
+        "line3": "Vous n'avez pas besoin d'un énième PowerPoint.",
+        "line4": "Vous avez besoin de systèmes. D'agents. De résultats concrets."
+      },
+      "block3": {
+        "line1": "C'est exactement ce que fait TsunAImi.",
+        "line2": "On ne parle pas de transformation — on la construit.",
+        "line3": "On ne vend pas des journées — on livre du momentum.",
+        "line4": "On ne promet pas une expertise — on la déploie, avec des bots qui livrent plus vite que des équipes entières."
+      },
+      "block4": {
+        "line1": "L'IA n'a pas juste changé les règles du jeu.",
+        "line2": "Elle a réécrit les règles.",
+        "line3": "Elle nous a réécrits, nous."
+      },
+      "block5": {
+        "line1": "On a été transformés — pas en théorie, mais en pratique.",
+        "line2": "On est augmentés. Plus rapides. Plus précis. Plus capables.",
+        "line3": "Et c'est ça qu'on propose : une voie claire, pour ceux qui veulent avancer."
+      },
+      "block6": {
+        "line1": "TsunAImi n'est pas une agence.",
+        "line2": "Ce n'est pas un cabinet de conseil.",
+        "line3": "C'est une rupture.",
+        "line4": "Une reconstruction.",
+        "line5": "Une vraie réponse à un système à bout de souffle."
+      },
+      "block7": {
+        "line1": "On ne met pas à jour les anciens modèles.",
+        "line2": "On en écrit un nouveau — en code."
+      }
     }
   }
 } 

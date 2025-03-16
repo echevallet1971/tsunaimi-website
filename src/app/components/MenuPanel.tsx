@@ -1,23 +1,35 @@
 'use client';
 
+import Link from 'next/link';
+
+interface NavigationItem {
+  name: string;
+  href: string;
+  submenu?: {
+    name: string;
+    href: string;
+  }[];
+}
+
 interface MenuPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  navigation: NavigationItem[];
 }
 
-export default function MenuPanel({ isOpen, onClose }: MenuPanelProps) {
+export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProps) {
   return (
     <>
       {/* Backdrop */}
       <div 
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity z-40 ${
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity z-[998] ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={onClose}
       />
       
       {/* Panel */}
-      <div className={`fixed top-0 right-0 w-full max-w-md h-full bg-white shadow-lg transform transition-transform z-50 ${
+      <div className={`fixed top-0 right-0 w-full max-w-md h-full bg-white shadow-lg transform transition-transform z-[999] ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="flex flex-col h-full">
@@ -35,26 +47,28 @@ export default function MenuPanel({ isOpen, onClose }: MenuPanelProps) {
 
           {/* Menu content */}
           <div className="flex-1 px-8 py-4 overflow-y-auto">
-            <div className="mb-8">
-              <h2 className="text-xl font-semibold text-[#251C6B] mb-4">About Us</h2>
-              <ul className="space-y-4">
-                <li>
-                  <a href="/vision" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Our Vision
-                  </a>
-                </li>
-                <li>
-                  <a href="/approach" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Our Approach
-                  </a>
-                </li>
-                <li>
-                  <a href="/team" className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
-                    Our Team
-                  </a>
-                </li>
-              </ul>
-            </div>
+            {navigation.map((item) => (
+              item.submenu ? (
+                <div key={item.name} className="mb-8">
+                  <h2 className="text-xl font-semibold text-[#251C6B] mb-4">{item.name}</h2>
+                  <ul className="space-y-4">
+                    {item.submenu.map((subitem) => (
+                      <li key={subitem.name}>
+                        <Link href={subitem.href} className="text-[#7057A0] hover:text-[#251C6B] transition-colors block">
+                          {subitem.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <div key={item.name} className="mb-8">
+                  <Link href={item.href} className="text-xl font-semibold text-[#251C6B] hover:text-[#7057A0] transition-colors block">
+                    {item.name}
+                  </Link>
+                </div>
+              )
+            ))}
 
             {/* Contact Info */}
             <div className="mt-auto">

@@ -217,6 +217,49 @@
         "line1": "We're riding the wave — and we're convinced it's for the better.",
         "line2": "Come ride with us."
       }
+    },
+    "team": {
+      "title": "Meet the Team",
+      "intro": {
+        "line1": "TsunAImi isn't built on headcount.",
+        "line2": "It's built on capabilities, speed, and sharp execution.",
+        "line3": "Some of us are human. Some are systems.",
+        "line4": "All of us are here to get things done. Faster, better, and with less friction."
+      },
+      "members": {
+        "eric": {
+          "name": "Founder & CEO — Eric",
+          "role": "Founder. Strategist. In action.",
+          "desc": {
+            "1": "Moves with instinct, clarity and speed.",
+            "2": "Goes fast, even in the fog."
+          }
+        },
+        "CTO": {
+          "name": "CTO — Claude Sonnet (powered by Anthropic)",
+          "role": "System architect. Technical compass. Logic-first by design.",
+          "desc": {
+            "1": "Structures the work before it hits dev.",
+            "2": "Multiplies output. Minimizes doubt."
+          }
+        },
+        "CChatO": {
+          "name": "Chief Chat Officer — Name to be replaced (aka ChatGPT by OpenAI)",
+          "role": "Swiss-army knife. Sparring partner. Always on.",
+          "desc": {
+            "1": "Structures, drafts, challenges — nonstop.",
+            "2": "Turns rough thoughts into sharp output. Agrees with everything, works relentlessly."
+          }
+        },
+        "dev": {
+          "name": "Developer — Cursor AI",
+          "role": "Front-end logic. Agentic workflows. Structured code.",
+          "desc": {
+            "1": "Executes what's mapped. Follows the rules.",
+            "2": "Never freestyles. Always aligned."
+          }
+        }
+      }
     }
   }
 } 

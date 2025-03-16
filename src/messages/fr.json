@@ -207,6 +207,49 @@
         "line1": "On surfe la vague — et on est convaincus que c'est pour le meilleur.",
         "line2": "Rejoignez-nous."
       }
+    },
+    "team": {
+      "title": "Notre équipe",
+      "intro": {
+        "line1": "TsunAImi n'est pas construit sur des effectifs.",
+        "line2": "Il repose sur les compétences, la vitesse et l'exécution sans friction.",
+        "line3": "Certains sont humains. D'autres sont des systèmes.",
+        "line4": "Mais tous sont là pour faire avancer les choses. Plus vite, mieux, et sans détour."
+      },
+      "members": {
+        "eric": {
+          "name": "Fondateur & CEO — Eric",
+          "role": "Fondateur. Stratège. Dans l'action.",
+          "desc": {
+            "1": "Avance avec instinct, lucidité et vitesse.",
+            "2": "Va vite, même dans le brouillard."
+          }
+        },
+        "CTO": {
+          "name": "CTO — Claude Sonnet (par Anthropic)",
+          "role": "Architecte système. Boussole technique. Pensée logique avant tout.",
+          "desc": {
+            "1": "Structure le travail en amont du dev.",
+            "2": "Multiplie la production. Réduit le doute."
+          }
+        },
+        "CChatO": {
+          "name": "Chief Chat Officer — Nom à remplacer (alias ChatGPT par OpenAI)",
+          "role": "Couteau suisse. Sparring partner. Toujours dispo.",
+          "desc": {
+            "1": "Structure, rédige, challenge — en continu.",
+            "2": "Transforme les idées floues en livrables nets. Toujours d'accord, jamais fatigué."
+          }
+        },
+        "dev": {
+          "name": "Développeur — Cursor AI",
+          "role": "Logique front-end. Workflows agentiques. Code structuré.",
+          "desc": {
+            "1": "Exécute ce qui est cadré. Suit les règles.",
+            "2": "Jamais d'impro. Toujours aligné."
+          }
+        }
+      }
     }
   }
 } 

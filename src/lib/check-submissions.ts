@@ -32,8 +32,8 @@ async function checkSubmissions() {
         
         // Display each submission in a readable format
         submissions.forEach((submission: ContactSubmission, index: number) => {
-            // Number from N to 1 (most recent submission is #1)
-            const submissionNumber = submissions.length - index;
+            // Number from 1 to N (oldest submission is #1)
+            const submissionNumber = index + 1;
             console.log(`Submission #${submissionNumber}:`);
             console.log('------------------------');
             console.log(`Name: ${submission.name}`);

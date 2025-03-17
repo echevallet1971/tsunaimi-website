@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { validateRequiredFields } from '@/lib/contact-validation';
-import { sendContactNotification } from '@/lib/email/mailer';
+import { validateContactSubmission } from './validation';
+import { query } from '@/lib/db';
 
 interface ContactFormData {
   name: string;
@@ -26,9 +27,9 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: Request) {
   try {
     // Get client IP for logging
-    const headersList = headers();
-    const forwardedFor = headersList.get('x-forwarded-for');
-    const clientIp = forwardedFor ? forwardedFor.split(',')[0] : 'unknown';
+    const headersList = await headers();
+    const forwardedFor = headersList.get('x-forwarded-for') || 'unknown';
+    const clientIp = forwardedFor.split(',')[0];
 
     const data = await request.json() as ContactFormData;
     
@@ -41,120 +42,54 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email notification
-    try {
-      // Only skip email sending if explicitly configured to do so
-      if (process.env.SKIP_EMAIL_SENDING === 'true') {
-        console.log('Email sending skipped due to configuration');
-        console.log('Form data:', data);
-        
-        // Return success response when skipping
-        return NextResponse.json(
-          { 
-            message: 'Email sending skipped. Form submission successful.' 
-          },
-          { status: 200 }
-        );
-      }
-      
-      const emailResult = await sendContactNotification({
-        name: data.name,
-        email: data.email,
-        message: `
-=== Contact Form Submission ===
-Timestamp: ${new Date().toISOString()}
-IP: ${clientIp}
-
-=== Contact Information ===
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company}
-Role: ${data.role}
-${data.phone_number ? `Phone: ${data.phone_number}` : ''}
-
-=== Interest ===
-${data.interest}
-
-=== Message ===
-${data.message}
-        `,
-        timestamp: new Date()
-      });
-
-      if (!emailResult.success) {
-        console.error('Failed to send email notification:', emailResult.error);
-        
-        // Check if it's a configuration error
-        const errorMessage = emailResult.error || '';
-        if (errorMessage.includes('Missing required email configuration')) {
-          // Store the form data in the logs at least
-          console.log('FORM SUBMISSION (EMAIL CONFIG MISSING):', {
-            name: data.name,
-            email: data.email,
-            company: data.company,
-            role: data.role,
-            interest: data.interest,
-            message: data.message,
-            phone_number: data.phone_number,
-            timestamp: new Date().toISOString()
-          });
-          
-          return NextResponse.json(
-            { 
-              message: 'Your message has been received. Due to a temporary issue with our email system, our team has been notified through our logging system.',
-              warning: 'Email notification system is currently unavailable.'
-            },
-            { status: 200 }
-          );
-        }
-        
-        return NextResponse.json(
-          { error: 'Failed to send notification. Please try again later.' },
-          { status: 500 }
-        );
-      }
-    } catch (emailError) {
-      console.error('Email notification error:', emailError);
-      
-      // Store the form data in the logs at least
-      console.log('FORM SUBMISSION (EMAIL ERROR):', {
-        name: data.name,
-        email: data.email,
-        company: data.company,
-        role: data.role,
-        interest: data.interest,
-        message: data.message,
-        phone_number: data.phone_number,
-        timestamp: new Date().toISOString(),
-        error: getErrorMessage(emailError)
-      });
-      
-      // Check if it's a configuration error
-      const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error';
-      if (errorMessage.includes('Missing required email configuration')) {
-        return NextResponse.json(
-          { 
-            message: 'Your message has been received. Due to a temporary issue with our email system, our team has been notified through our logging system.',
-            warning: 'Email notification system is currently unavailable.'
-          },
-          { status: 200 }
-        );
-      }
-      
+    // Check for rate limiting
+    const validationResult = await validateContactSubmission(data.email);
+    if (!validationResult.isValid) {
       return NextResponse.json(
-        { error: 'Failed to send notification. Please try again later.' },
-        { status: 500 }
+        { error: validationResult.message },
+        { status: 429 }
       );
     }
 
-    return NextResponse.json(
-      { 
-        message: 'Thank you for your interest in TsunAImi! We have received your inquiry and our team will get back to you shortly.' 
-      },
-      { status: 200 }
-    );
+    try {
+      // Store the submission in the database
+      await query(
+        `INSERT INTO contact_submissions 
+        (name, email, company, role, interest, message, phone_number, processed)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [
+          data.name,
+          data.email,
+          data.company,
+          data.role,
+          data.interest,
+          data.message,
+          data.phone_number || null,
+          false // New submissions are not processed
+        ]
+      );
+
+      // Log the submission for monitoring
+      console.log('Contact form submission stored:', {
+        email: data.email,
+        company: data.company,
+        timestamp: new Date().toISOString(),
+        ip: clientIp
+      });
+
+      return NextResponse.json(
+        { message: 'Contact form submission stored successfully.' },
+        { status: 200 }
+      );
+    } catch (dbError) {
+      console.error('Database error:', dbError);
+      return NextResponse.json(
+        { error: 'Failed to store your submission. Please try again later.' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error('Error processing form submission:', error);
+    console.error('Contact form submission error:', error);
     return NextResponse.json(
       { error: getErrorMessage(error) },
       { status: 500 }

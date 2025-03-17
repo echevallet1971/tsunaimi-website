@@ -23,20 +23,30 @@ async function getMessages(locale: string) {
   }
 }
 
+// This component will set the HTML lang attribute
+function LocaleHtmlAttributes({ locale }: { locale: string }) {
+  // This is a client component that can modify the HTML element
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `document.documentElement.lang = "${locale}";`
+      }}
+    />
+  );
+}
+
 export default async function LocaleLayout({
   children,
   params: { locale },
 }: LocaleLayoutProps) {
   const messages = await getMessages(locale);
 
-  // Update the HTML lang attribute based on the current locale
-  if (typeof document !== 'undefined') {
-    document.documentElement.lang = locale;
-  }
-
   return (
-    <LayoutContent locale={locale} messages={messages}>
-      {children}
-    </LayoutContent>
+    <>
+      <LocaleHtmlAttributes locale={locale} />
+      <LayoutContent locale={locale} messages={messages}>
+        {children}
+      </LayoutContent>
+    </>
   );
 } 

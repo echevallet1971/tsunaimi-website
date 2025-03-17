@@ -13,6 +13,8 @@ export const metadata = {
   },
 };
 
+// This is a server component, so we can't access the URL directly
+// The actual lang attribute will be set in the [locale] layout
 export default function RootLayout({
   children,
 }: {

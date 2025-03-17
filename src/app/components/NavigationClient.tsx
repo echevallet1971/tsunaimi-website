@@ -26,7 +26,7 @@ export default function NavigationClient({ locale, navigation, isMenuOpen, onMen
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href={`/${locale}`} className="flex items-center">
+            <Link href={`/${locale}`} className="flex items-center" prefetch={true}>
               <Logo variant="full" />
             </Link>
           </div>
@@ -35,6 +35,7 @@ export default function NavigationClient({ locale, navigation, isMenuOpen, onMen
             <button
               onClick={onMenuToggle}
               className="text-[#251C6B] hover:text-[#7057A0] transition-colors p-2"
+              aria-label="Toggle menu"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

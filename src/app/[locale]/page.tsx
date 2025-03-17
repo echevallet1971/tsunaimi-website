@@ -7,6 +7,35 @@ import { useParams } from 'next/navigation';
 import ContactFormWrapper from '../components/ContactFormWrapper';
 import { RobotIcon, BrainIcon, ClockIcon, RocketIcon } from '../components/Icons';
 
+// Loading skeleton component
+function LoadingSkeleton() {
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section Skeleton */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#7057A0] to-[#251C6B]"></div>
+        </div>
+        <div className="container relative z-10 px-4 py-12">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+            {/* Image placeholder */}
+            <div className="w-full lg:w-1/2 relative aspect-square lg:aspect-auto lg:h-[600px] bg-[#7057A0]/50 rounded-2xl animate-pulse"></div>
+            {/* Content placeholder */}
+            <div className="w-full lg:w-1/2 space-y-8">
+              <div className="h-12 bg-white/20 rounded-lg animate-pulse"></div>
+              <div className="space-y-4">
+                <div className="h-8 bg-white/20 rounded-lg animate-pulse"></div>
+                <div className="h-8 bg-white/20 rounded-lg animate-pulse"></div>
+              </div>
+              <div className="h-14 w-48 bg-white/20 rounded-lg animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export default function Home() {
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -28,29 +57,13 @@ export default function Home() {
     loadMessages();
   }, [locale]);
 
-  // Debug logging
-  useEffect(() => {
-    console.log('Client-side mount:', {
-      locale,
-      isContactFormOpen,
-      mounted,
-      timestamp: new Date().toISOString()
-    });
-  }, [locale, isContactFormOpen, mounted]);
-
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Prevent any interaction before hydration is complete
+  // Show loading skeleton during initial load
   if (!mounted || !messages) {
-    console.log('Server-side render:', {
-      locale,
-      isContactFormOpen,
-      mounted,
-      timestamp: new Date().toISOString()
-    });
-    return null;
+    return <LoadingSkeleton />;
   }
 
   const handleContactClick = () => {
@@ -75,6 +88,8 @@ export default function Home() {
                 fill
                 className="object-cover rounded-2xl"
                 priority
+                fetchPriority="high"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             {/* Content on the right */}
@@ -245,7 +260,8 @@ export default function Home() {
                   fill
                   className="object-cover rounded-2xl"
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  loading="lazy"
+                  loading="eager"
+                  fetchPriority="auto"
                 />
               </div>
             </div>
@@ -274,12 +290,15 @@ export default function Home() {
         </div>
       </section>
 
-      <ContactFormWrapper 
-        isOpen={isContactFormOpen}
-        onClose={() => setIsContactFormOpen(false)}
-        locale={locale}
-        messages={messages}
-      />
+      {/* Contact Form */}
+      {mounted && isContactFormOpen && (
+        <ContactFormWrapper 
+          isOpen={isContactFormOpen} 
+          onClose={() => setIsContactFormOpen(false)} 
+          locale={locale} 
+          messages={null}
+        />
+      )}
     </div>
   );
 } 

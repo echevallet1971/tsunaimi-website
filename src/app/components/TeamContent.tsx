@@ -55,10 +55,7 @@ export default function TeamContent() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="h-48 bg-gradient-to-b from-[#7057A0] to-[#251C6B] flex items-center justify-center pt-14 relative">
-        <div className="absolute top-4 left-4">
-          <Logo variant="full" />
-        </div>
+      <div className="h-48 bg-gradient-to-b from-[#7057A0] to-[#251C6B] flex items-center justify-center pt-14">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
           {t('title')}
         </h1>

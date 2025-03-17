@@ -35,6 +35,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState('');
   const [fieldValidation, setFieldValidation] = useState<FieldValidation>({});
   const errorRef = useRef<HTMLDivElement>(null);
   const firstInvalidFieldRef = useRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(null);
@@ -62,6 +63,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
       setFormData(initialFormData);
       setSubmitStatus('idle');
       setErrorMessage('');
+      setWarningMessage('');
       setFieldValidation({});
     }
   }, [isOpen]);
@@ -175,6 +177,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
+    setWarningMessage('');
 
     // Validate all required fields
     const validations: FieldValidation = {};
@@ -215,6 +218,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
     }
 
     try {
+      // Use the API route for form submission
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -230,6 +234,11 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
           throw new Error(t('form.error_rate_limit'));
         }
         throw new Error(data.error || t('form.error_submit'));
+      }
+
+      // Check for warnings in the response
+      if (data.warning) {
+        setWarningMessage(data.warning);
       }
 
       setSubmitStatus('success');
@@ -252,6 +261,7 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
     setFormData(initialFormData);
     setSubmitStatus('idle');
     setErrorMessage('');
+    setWarningMessage('');
     setFieldValidation({});
     onClose();
   };
@@ -389,6 +399,12 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
                   </div>
                   <h3 className="text-xl font-bold text-[#251C6B] mb-2">{t('form.success')}</h3>
                   <p className="text-[#7057A0]">{t('form.success_message')}</p>
+                  
+                  {warningMessage && (
+                    <div className="mt-4 p-3 bg-yellow-50 text-yellow-800 rounded-lg text-sm">
+                      <p>{warningMessage}</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>

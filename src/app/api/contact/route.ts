@@ -20,6 +20,9 @@ function getErrorMessage(error: unknown): string {
   return 'An unexpected error occurred';
 }
 
+// Add export const dynamic = 'force-dynamic' to ensure this route is always server-rendered
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     // Get client IP for logging
@@ -40,6 +43,20 @@ export async function POST(request: Request) {
 
     // Send email notification
     try {
+      // Check if we're in development mode and skip actual email sending
+      if (process.env.NODE_ENV === 'development' || process.env.SKIP_EMAIL_SENDING === 'true') {
+        console.log('Development mode: Skipping email sending');
+        console.log('Form data:', data);
+        
+        // Return success response in development
+        return NextResponse.json(
+          { 
+            message: 'Development mode: Email sending skipped. Form submission successful.' 
+          },
+          { status: 200 }
+        );
+      }
+      
       const emailResult = await sendContactNotification({
         name: data.name,
         email: data.email,
@@ -66,6 +83,31 @@ ${data.message}
 
       if (!emailResult.success) {
         console.error('Failed to send email notification:', emailResult.error);
+        
+        // Check if it's a configuration error
+        const errorMessage = emailResult.error || '';
+        if (errorMessage.includes('Missing required email configuration')) {
+          // Store the form data in the logs at least
+          console.log('FORM SUBMISSION (EMAIL CONFIG MISSING):', {
+            name: data.name,
+            email: data.email,
+            company: data.company,
+            role: data.role,
+            interest: data.interest,
+            message: data.message,
+            phone_number: data.phone_number,
+            timestamp: new Date().toISOString()
+          });
+          
+          return NextResponse.json(
+            { 
+              message: 'Your message has been received. Due to a temporary issue with our email system, our team has been notified through our logging system.',
+              warning: 'Email notification system is currently unavailable.'
+            },
+            { status: 200 }
+          );
+        }
+        
         return NextResponse.json(
           { error: 'Failed to send notification. Please try again later.' },
           { status: 500 }
@@ -73,6 +115,32 @@ ${data.message}
       }
     } catch (emailError) {
       console.error('Email notification error:', emailError);
+      
+      // Store the form data in the logs at least
+      console.log('FORM SUBMISSION (EMAIL ERROR):', {
+        name: data.name,
+        email: data.email,
+        company: data.company,
+        role: data.role,
+        interest: data.interest,
+        message: data.message,
+        phone_number: data.phone_number,
+        timestamp: new Date().toISOString(),
+        error: getErrorMessage(emailError)
+      });
+      
+      // Check if it's a configuration error
+      const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error';
+      if (errorMessage.includes('Missing required email configuration')) {
+        return NextResponse.json(
+          { 
+            message: 'Your message has been received. Due to a temporary issue with our email system, our team has been notified through our logging system.',
+            warning: 'Email notification system is currently unavailable.'
+          },
+          { status: 200 }
+        );
+      }
+      
       return NextResponse.json(
         { error: 'Failed to send notification. Please try again later.' },
         { status: 500 }

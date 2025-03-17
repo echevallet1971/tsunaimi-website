@@ -16,7 +16,14 @@ export function getEmailConfig(): EmailConfig {
     throw new Error(
       `Missing required email configuration fields: ${missingFields.join(
         ', '
-      )}. Please check your .env.local file.`
+      )}. Please add the following environment variables to your .env.local file: ${missingFields.map(field => {
+        switch(field) {
+          case 'apiKey': return 'MAILERSEND_API_KEY';
+          case 'toEmail': return 'MAILERSEND_TO_EMAIL';
+          case 'toName': return 'MAILERSEND_TO_NAME';
+          default: return field;
+        }
+      }).join(', ')}`
     );
   }
 

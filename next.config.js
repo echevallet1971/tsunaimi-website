@@ -2,7 +2,8 @@
 const withNextIntl = require('next-intl/plugin')();
 
 const nextConfig = {
-  output: 'export',
+  // Remove static export to enable API routes
+  // output: 'export',
   images: {
     remotePatterns: [
       {

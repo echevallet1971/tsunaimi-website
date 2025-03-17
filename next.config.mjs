@@ -4,10 +4,16 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
-  output: 'export',
+  // Remove static export to enable API routes
+  // output: 'export',
+  
+  // Configure images for server-side rendering
   images: {
-    unoptimized: true,
+    domains: [],
+    remotePatterns: [],
   },
+  
+  // Cache control headers
   async headers() {
     return [
       {

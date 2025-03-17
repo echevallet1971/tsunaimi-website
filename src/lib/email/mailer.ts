@@ -2,11 +2,44 @@ import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend';
 import { ContactNotification, EmailResult } from './types';
 import { getEmailConfig } from './config';
 
+/**
+ * Development-only email handler that logs form submissions instead of sending emails
+ */
+function handleDevEmail(notification: ContactNotification): EmailResult {
+  console.log('=== DEVELOPMENT MODE: Email would be sent with the following data ===');
+  console.log('From:', 'notifications@tsunaimi.ai', '(TsunAImi Contact Form)');
+  console.log('To: Would use MAILERSEND_TO_EMAIL from env vars');
+  console.log('Subject: New Contact Form Submission');
+  console.log('Name:', notification.name);
+  console.log('Email:', notification.email);
+  console.log('Message:', notification.message);
+  console.log('Timestamp:', notification.timestamp.toLocaleString());
+  console.log('=== END OF EMAIL PREVIEW ===');
+  
+  return { success: true };
+}
+
 export async function sendContactNotification(
   notification: ContactNotification
 ): Promise<EmailResult> {
+  // Always use development handler in development mode
+  if (process.env.NODE_ENV === 'development' || process.env.SKIP_EMAIL_SENDING === 'true') {
+    return handleDevEmail(notification);
+  }
+  
   try {
-    const config = getEmailConfig();
+    // Check if email configuration is available
+    let config;
+    try {
+      config = getEmailConfig();
+    } catch (configError) {
+      console.error('Email configuration error:', configError);
+      return {
+        success: false,
+        error: configError instanceof Error ? configError.message : 'Missing email configuration'
+      };
+    }
+    
     const mailerSend = new MailerSend({ apiKey: config.apiKey });
 
     const recipients = [

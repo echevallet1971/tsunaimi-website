@@ -344,14 +344,14 @@ export default function ContactForm({ isOpen, onClose, locale }: ContactFormProp
     <div className="relative">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity z-40"
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity z-[998]"
         onClick={handleClose}
         aria-hidden="true"
       />
       
       {/* Modal */}
       <div 
-        className="fixed inset-0 z-50 overflow-y-auto"
+        className="fixed inset-0 z-[999] overflow-y-auto"
         role="dialog"
         aria-labelledby="contact-form-title"
         aria-modal="true"

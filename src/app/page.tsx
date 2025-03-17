@@ -1,24 +1,8 @@
 import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
 
+// For static exports, we'll default to English
+// The middleware will handle dynamic locale detection in the browser
 export default function RootPage() {
-  // Default to English
-  let locale = 'en';
-  
-  // Try to get the Accept-Language header
-  try {
-    const headersList = headers();
-    const acceptLanguage = headersList.get('accept-language') || '';
-    
-    // Check if French is preferred
-    if (acceptLanguage.toLowerCase().includes('fr')) {
-      locale = 'fr';
-    }
-  } catch (error) {
-    // If there's any error, fall back to English
-    console.error('Error detecting language:', error);
-  }
-  
-  // Redirect to the appropriate locale
-  redirect(`/${locale}`);
+  // Static redirect to English version
+  redirect('/en');
 } 

@@ -7,11 +7,11 @@ export default function ManifestoContent() {
 
   const renderBlock = (blockNumber: number, lineCount: number) => {
     return (
-      <div className="mb-8">
+      <div className="mb-6">
         {Array.from({ length: lineCount }).map((_, i) => (
           <p 
             key={`block${blockNumber}_line${i + 1}`}
-            className="text-xl md:text-2xl text-[#111827] leading-relaxed whitespace-pre-line"
+            className="text-lg md:text-xl text-[#111827] leading-relaxed whitespace-pre-line"
           >
             {t(`block${blockNumber}.line${i + 1}`)}
           </p>
@@ -31,20 +31,24 @@ export default function ManifestoContent() {
 
       {/* Content */}
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Title */}
-          <p className="text-xl md:text-2xl text-[#111827] italic mb-8">
-            {t('title')}
-          </p>
+          <div className="mb-12">
+            <p className="text-lg md:text-xl text-[#111827] italic">
+              {t('title')}
+            </p>
+          </div>
 
           {/* Blocks */}
-          {renderBlock(1, 2)}
-          {renderBlock(2, 4)}
-          {renderBlock(3, 4)}
-          {renderBlock(4, 3)}
-          {renderBlock(5, 3)}
-          {renderBlock(6, 5)}
-          {renderBlock(7, 2)}
+          <div className="space-y-8">
+            {renderBlock(1, 2)}
+            {renderBlock(2, 4)}
+            {renderBlock(3, 4)}
+            {renderBlock(4, 3)}
+            {renderBlock(5, 3)}
+            {renderBlock(6, 5)}
+            {renderBlock(7, 2)}
+          </div>
         </div>
       </div>
 

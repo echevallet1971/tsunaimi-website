@@ -1,10 +1,9 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "TsunAImi - Agentic AI Solutions",
   description: "Built with AI. Deployed for impact.",
   other: {
@@ -16,11 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html className="scroll-smooth">
       <body className={inter.className}>
         {children}
       </body>

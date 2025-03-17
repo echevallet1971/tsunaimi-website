@@ -29,13 +29,14 @@ export default async function LocaleLayout({
 }: LocaleLayoutProps) {
   const messages = await getMessages(locale);
 
+  // Update the HTML lang attribute based on the current locale
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = locale;
+  }
+
   return (
-    <html lang={locale}>
-      <body>
-        <LayoutContent locale={locale} messages={messages}>
-          {children}
-        </LayoutContent>
-      </body>
-    </html>
+    <LayoutContent locale={locale} messages={messages}>
+      {children}
+    </LayoutContent>
   );
 } 

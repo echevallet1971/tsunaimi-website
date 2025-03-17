@@ -9,6 +9,11 @@ export default function TeamContent() {
 
   const teamMembers = ['eric', 'CTO', 'CChatO', 'dev'];
 
+  const getProfileImage = (memberId: string) => {
+    // Use team-ech.jpg for the CEO and team-other.jpeg for everyone else
+    return memberId === 'eric' ? '/assets/images/team-ech.jpg' : '/assets/images/team-other.jpeg';
+  };
+
   const renderTeamMember = (memberId: string) => {
     // All members will have 2 description lines starting from index 1
     const descriptionCount = 2;
@@ -16,11 +21,15 @@ export default function TeamContent() {
 
     return (
       <div key={memberId} className="flex flex-col md:flex-row gap-4 items-start py-6 first:pt-0 border-t first:border-t-0">
-        {/* Image placeholder */}
-        <div className="w-32 md:w-40 aspect-square bg-gradient-to-br from-[#7057A0]/10 to-[#251C6B]/10 rounded-2xl overflow-hidden relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-sm text-[#251C6B]">{t('placeholder.image')}</p>
-          </div>
+        {/* Profile Image */}
+        <div className="w-32 md:w-40 aspect-square rounded-2xl overflow-hidden relative">
+          <Image 
+            src={getProfileImage(memberId)}
+            alt={t(`members.${memberId}.name`)}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 8rem, 10rem"
+          />
         </div>
         
         {/* Content */}

@@ -43,15 +43,15 @@ export async function POST(request: Request) {
 
     // Send email notification
     try {
-      // Check if we're in development mode and skip actual email sending
-      if (process.env.NODE_ENV === 'development' || process.env.SKIP_EMAIL_SENDING === 'true') {
-        console.log('Development mode: Skipping email sending');
+      // Only skip email sending if explicitly configured to do so
+      if (process.env.SKIP_EMAIL_SENDING === 'true') {
+        console.log('Email sending skipped due to configuration');
         console.log('Form data:', data);
         
-        // Return success response in development
+        // Return success response when skipping
         return NextResponse.json(
           { 
-            message: 'Development mode: Email sending skipped. Form submission successful.' 
+            message: 'Email sending skipped. Form submission successful.' 
           },
           { status: 200 }
         );

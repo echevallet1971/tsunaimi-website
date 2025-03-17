@@ -22,8 +22,8 @@ function handleDevEmail(notification: ContactNotification): EmailResult {
 export async function sendContactNotification(
   notification: ContactNotification
 ): Promise<EmailResult> {
-  // Always use development handler in development mode
-  if (process.env.NODE_ENV === 'development' || process.env.SKIP_EMAIL_SENDING === 'true') {
+  // Only use development handler if SKIP_EMAIL_SENDING is explicitly set to true
+  if (process.env.SKIP_EMAIL_SENDING === 'true') {
     return handleDevEmail(notification);
   }
   
@@ -65,7 +65,8 @@ export async function sendContactNotification(
       `);
 
     await mailerSend.email.send(emailParams);
-
+    console.log('Email sent successfully to', config.toEmail);
+    
     return { success: true };
   } catch (error) {
     console.error('Failed to send contact notification:', error);

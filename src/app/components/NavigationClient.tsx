@@ -22,7 +22,7 @@ interface NavigationClientProps {
 
 export default function NavigationClient({ locale, navigation, isMenuOpen, onMenuToggle }: NavigationClientProps) {
   return (
-    <nav className="bg-white/80 backdrop-blur-sm shadow-lg fixed w-full z-[997] border-b border-[#E5E7EB]">
+    <nav className="bg-white backdrop-blur-sm shadow-lg fixed w-full z-[997] border-b border-[#E5E7EB]">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">

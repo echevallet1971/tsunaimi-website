@@ -1,6 +1,57 @@
-# Environment Configuration Guide
+# Environment Configuration
 
-This document outlines how to set up and manage environment configurations for the TsunAImi website.
+## Database Setup
+
+The project uses PostgreSQL with different database names for each environment:
+- Development: `tsunaimi_dev`
+- Staging: `tsunaimi_staging`
+- Production: `tsunaimi_prod`
+
+## Environment Variables
+
+Each environment has its own configuration file:
+- Development: `.env.development`
+- Staging: `.env.staging`
+- Production: `.env.production` (not committed to repository)
+
+Required variables:
+- `DB_USER` - Database username
+- `DB_HOST` - Database host
+- `DB_NAME` - Database name
+- `DB_PORT` - Database port (default: 5433)
+- `DB_SSL` - Use SSL connection (true/false)
+
+## Setting Up a New Environment
+
+1. Create appropriate `.env.[environment]` file
+2. Run database setup script:
+   ```bash
+   cd scripts
+   ./setup-db.sh [environment]
+   ```
+
+## Security Notes
+
+- Never commit sensitive credentials to the repository
+- Use environment-specific SSL settings
+- Production credentials should be managed separately
+- Use strong passwords and restricted database users
+
+## Deployment Process
+
+1. Choose target environment (development/staging/production)
+2. Ensure environment variables are properly configured
+3. Run database setup script if needed
+4. Deploy application code
+5. Verify database connectivity
+
+## Troubleshooting
+
+If database connection fails:
+1. Verify environment variables
+2. Check database existence
+3. Confirm network connectivity
+4. Verify SSL settings if applicable
 
 ## Environment Files
 
@@ -26,25 +77,6 @@ We use different environment files for different deployment stages:
 
 3. Never commit actual environment files (`.env.*`) to git. Only `.env.example` should be committed.
 
-## Environment Variables
-
-### Database Configuration
-- `DB_USER` - Database username
-- `DB_HOST` - Database host
-- `DB_NAME` - Database name
-- `DB_PORT` - Database port (default: 5432)
-- `DB_SSL` - Whether to use SSL (true/false)
-- `POSTGRES_PASSWORD` - Database password
-
-### Email Configuration
-- `EMAIL_SERVICE` - Email service to use (console/smtp/sendgrid)
-- `EMAIL_USER` - Email service username
-- `EMAIL_FROM` - From address for emails
-- `EMAIL_TO` - Default recipient address
-
-### Node Environment
-- `NODE_ENV` - Environment name (development/staging/production)
-
 ## Environment-Specific Settings
 
 ### Local Development (.env.local)
@@ -63,21 +95,15 @@ We use different environment files for different deployment stages:
 - Enhanced security settings
 - Production-level logging and monitoring
 
-## Security Notes
+## Email Configuration
 
-1. Never store sensitive credentials in code or git
-2. Use appropriate security measures for each environment
-3. Regularly rotate passwords and access keys
-4. Monitor access logs and unusual activity
+### Email Configuration
+- `EMAIL_SERVICE` - Email service to use (console/smtp/sendgrid)
+- `EMAIL_USER` - Email service username
+- `EMAIL_FROM` - From address for emails
+- `EMAIL_TO` - Default recipient address
 
-## Troubleshooting
-
-If you encounter database connection issues:
-
-1. Check that your environment file exists and is properly named
-2. Verify all required variables are set
-3. Ensure database credentials are correct
-4. Check database server is accessible from your environment
-5. Verify SSL settings match your environment
+### Node Environment
+- `NODE_ENV` - Environment name (development/staging/production)
 
 For more information, refer to the project documentation or contact the development team. 

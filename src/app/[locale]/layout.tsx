@@ -23,10 +23,9 @@ async function getMessages(locale: string) {
   }
 }
 
-export default async function LocaleLayout({
-  children,
-  params: { locale },
-}: LocaleLayoutProps) {
+export default async function LocaleLayout(props: LocaleLayoutProps) {
+  const { children, params } = props;
+  const locale = params.locale;
   const messages = await getMessages(locale);
 
   return (

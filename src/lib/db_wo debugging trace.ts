@@ -5,10 +5,6 @@ import * as dotenv from 'dotenv';
 
 // Load the appropriate .env file
 const env = process.env.NODE_ENV || 'development';
-console.log('DEBUG - Current NODE_ENV:', env);
-console.log('DEBUG - Current working directory:', process.cwd());
-console.log('DEBUG - Attempting to load:', `.env.${env}`);
-
 if (env === 'development') {
   dotenv.config({ path: '.env.local' });
 } else {
@@ -35,20 +31,10 @@ function getEnvConfig(): PoolConfig {
     connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
   };
 
-  // Add debug logging
-  console.log('DEBUG - Database config:', {
-    user: config.user,
-    host: config.host,
-    database: config.database,
-    port: config.port,
-    ssl: config.ssl,
-    DB_SSL_RAW: process.env.DB_SSL  // This will show us the exact value from env
-  });
-
   // Validate required configuration
   const requiredFields = ['user', 'host', 'database', 'password'] as const;
   const missingFields = requiredFields.filter(field => !config[field]);
-
+  
   if (missingFields.length > 0) {
     throw new Error(
       `Missing required database configuration: ${missingFields.join(', ')}. ` +
@@ -94,7 +80,7 @@ export async function query<T>(text: string, params?: any[]): Promise<T[]> {
 export async function transaction<T>(callback: (client: any) => Promise<T>): Promise<T> {
   const pool = await getPool();
   const client = await pool.connect();
-
+  
   try {
     await client.query('BEGIN');
     const result = await callback(client);
@@ -114,4 +100,4 @@ process.on('SIGTERM', async () => {
     await pool.end();
     pool = null;
   }
-});
+}); 

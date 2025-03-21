@@ -24,8 +24,8 @@
   },
   "home": {
     "hero": {
-      "headline": "On ne libère pas la puissance de l'IA avec les méthodes d'hier.",
-      "subheadline1": "Les modes de pensée traditionnels ne fonctionnent plus.",
+      "headline": "Les meilleures pratiques d'hier brident le potentiel de l'IA.",
+      "subheadline1": "Les modes de pensée traditionnels ne fonctionnent pas.",
       "subheadline2": "On peut vous aider à passer à la suite.",
       "cta_button": "Venez voir comment ça se passe chez nous."
     },
@@ -43,19 +43,19 @@
       "headline": "On ne parle pas d'IA. On construit avec elle.",
       "subheadline": "On part d'un besoin. On livre une solution qui vous fait entrer dans l'IA, pour de vrai.",
       "service1": {
+        "title": "Résolution de problèmes réels",
+        "desc": "On ne part pas d'un cas d'usage sur catalogue. On part d'un irritant qui vous concerne.",
+        "sub": "Et on construit une solution qui le fait disparaître. Et que tout le monde veut utiliser."
+      },
+      "service2": {
         "title": "Prototypage rapide de cas d'usage",
         "desc": "On transforme vos idées en prototypes fonctionnels. En quelques jours, pas en quelques mois.",
         "sub": "On teste vite. On valide vite. On ne scale que ce qui fonctionne."
       },
-      "service2": {
+      "service3": {
         "title": "Design de modèle opérationnel",
         "desc": "L'IA transforme votre manière de travailler. On vous aide à évoluer avec.",
         "sub": "Structure, rôles, process — on les fait évoluer pour que l'IA vienne renforcer vos équipes, pas les remplacer."
-      },
-      "service3": {
-        "title": "Résolution de problèmes réels",
-        "desc": "On ne part pas d'un cas d'usage sur catalogue. On part d'un irritant qui vous concerne.",
-        "sub": "Et on construit une solution qui le fait disparaître. Et que tout le monde veut utiliser."
       },
       "service4": {
         "title": "Conception de systèmes multi-agents",
@@ -71,7 +71,7 @@
       "subheadline2": "On prototype le futur."
     },
     "final_cta": {
-      "headline": "L'IA est là. Que vous le vouliez ou non. C'est inévitable.",
+      "headline": "L'IA est là. Ce n'est pas une question de si. Ni de quand. Mais de comment. Parce que c'est inévitable.",
       "subheadline1": "Attendre ne changera rien.",
       "subheadline2": "Autant en tirer parti. Maintenant.",
       "button_text": "Contactez-nous"

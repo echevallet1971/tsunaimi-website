@@ -58,19 +58,19 @@
       "headline": "We don't just talk about AI. We build with it.",
       "subheadline": "From idea to agent — fast.",
       "service1": {
+        "title": "Solving Real Problems",
+        "desc": "We don't start from a catalog of use cases. We start from a friction point that matters to you.",
+        "sub": "Then we build the solution that removes it — and that everyone wants to use."
+      },
+      "service2": {
         "title": "Rapid Use-Case Prototyping",
         "desc": "We turn ideas into working prototypes in days—not months.",
         "sub": "Test fast. Validate fast. Scale only what sticks."
       },
-      "service2": {
+      "service3": {
         "title": "Operating Model Design",
         "desc": "AI changes how you work. We help you change with it.",
         "sub": "Structure, workflows, roles—we rethink your ops for an agentic world."
-      },
-      "service3": {
-        "title": "Solving Real Problems",
-        "desc": "We don't start from a catalog of use cases. We start from a friction point that matters to you.",
-        "sub": "Then we build the solution that removes it — and that everyone wants to use."
       },
       "service4": {
         "title": "Multi-Agent System Development",
@@ -86,7 +86,7 @@
       "subheadline2": "We prototype the future."
     },
     "final_cta": {
-      "headline": "AI is here. Whether you like it or not. It's inevitable.",
+      "headline": "AI is here. It's not if. It's not when. It's how. Because it's inevitable.",
       "subheadline1": "Waiting won't help.",
       "subheadline2": "Time to turn it into an advantage.",
       "button_text": "Contact us"

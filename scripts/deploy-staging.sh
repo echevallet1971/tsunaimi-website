@@ -9,7 +9,7 @@
 #
 # Usage:
 #   ./deploy-staging.sh [new-release-version]
-#   Example: ./deploy-staging.sh 0.4.1
+#   Example: ./deploy-staging.sh 0.4.2
 #
 # What this script does:
 # 1. Merges current feature branch to develop
@@ -19,16 +19,23 @@
 #
 # To make executable: chmod +x deploy-staging.sh
 
+# NAS Configuration
+NAS_USER="ECh Admin DS923"
+NAS_IP="192.168.1.32"
+NAS_RELEASES_PATH="/volume1/web/tsunaimi/releases"
+NAS_STAGING_PATH="/volume1/web/tsunaimi/staging"
+
 # Check if version argument is provided
 if [ -z "$1" ]; then
     echo "Error: Release version not provided"
     echo "Usage: ./deploy-staging.sh [new-release-version]"
-    echo "Example: ./deploy-staging.sh 0.4.1"
+    echo "Example: ./deploy-staging.sh 0.4.2"
     exit 1
 fi
 
 NEW_VERSION=$1
 CURRENT_BRANCH=$(git branch --show-current)
+RELEASE_NAME="tsunaimi-website-v$NEW_VERSION"
 
 echo "Current branch: $CURRENT_BRANCH"
 echo "New release version: $NEW_VERSION"
@@ -48,46 +55,44 @@ git merge $CURRENT_BRANCH
 
 # Check if merge was successful
 if [ $? -ne 0 ]; then
-    echo "Merge failed. Please resolve conflicts and run script again"
+    echo "Error: Merge to develop failed"
     exit 1
 fi
 
-# Step 2: Create release branch
+# Push to develop
+git push origin develop
+
+# Step 2: Create and push release branch
 echo "Creating release branch..."
 git checkout -b release/$NEW_VERSION
+git push -u origin release/$NEW_VERSION
 
-# Step 3: Push branches
-echo "Pushing changes..."
-git push origin develop
-git push origin release/$NEW_VERSION
+# Step 3: Create deployment package
+echo "Creating deployment package..."
+tar -czf ${RELEASE_NAME}.tar.gz --exclude='.git' --exclude='node_modules' --exclude='.next' .
 
-# Step 4: Prepare for deployment
-echo "
-Deployment preparation complete!
+# Step 4: Copy to NAS
+echo "Copying to NAS..."
+# Create release directory
+ssh "$NAS_USER@$NAS_IP" "mkdir -p $NAS_RELEASES_PATH/$RELEASE_NAME"
+scp ${RELEASE_NAME}.tar.gz "$NAS_USER@$NAS_IP:$NAS_RELEASES_PATH/$RELEASE_NAME/"
 
-Next steps for NAS deployment:
-1. Create TAR of the codebase:
-   tar -czf tsunaimi-website-$NEW_VERSION.tar.gz ../tsunaimi-website
+# Create staging directory
+ssh "$NAS_USER@$NAS_IP" "mkdir -p $NAS_STAGING_PATH/$RELEASE_NAME"
+scp ${RELEASE_NAME}.tar.gz "$NAS_USER@$NAS_IP:$NAS_STAGING_PATH/$RELEASE_NAME/"
 
-2. Copy TAR to NAS and extract:
-   scp tsunaimi-website-$NEW_VERSION.tar.gz user@nas:/path/to/deployment
-   ssh user@nas
-   cd /path/to/deployment
-   tar -xzf tsunaimi-website-$NEW_VERSION.tar.gz
+# Step 5: Extract and setup on NAS
+echo "Setting up on NAS..."
+ssh "$NAS_USER@$NAS_IP" "cd $NAS_STAGING_PATH/$RELEASE_NAME && tar xzf ${RELEASE_NAME}.tar.gz"
 
-3. Set up database (if not already done):
-   docker exec -i [postgres-container-name] psql -U postgres -f scripts/init-db-docker.sql
+# Clean up local tar file
+rm ${RELEASE_NAME}.tar.gz
 
-4. Install dependencies and build:
-   cd tsunaimi-website
-   npm install
-   npm run build
-   npm run start
-
-5. Verify deployment:
-   - Check website is accessible
-   - Run npm run db:test to verify database connection
-   - Test contact form submission
-"
-
-echo "Script completed successfully!" 
+echo "Deployment completed!"
+echo "Next steps:"
+echo "1. SSH into the NAS"
+echo "2. Navigate to $NAS_STAGING_PATH/$RELEASE_NAME"
+echo "3. Run 'npm install'"
+echo "4. Run 'npm run build'"
+echo "5. Update environment variables if needed"
+echo "6. Start the application with 'PORT=3001 npm run start'" 

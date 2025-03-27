@@ -1,18 +1,13 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { headers } from 'next/headers';
+import { Metadata } from 'next';
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "TsunAImi - Agentic AI Solutions",
-  description: "Built with AI. Deployed for impact.",
-  other: {
-    'Cache-Control': 'no-cache, no-store, must-revalidate',
-    'Pragma': 'no-cache',
-    'Expires': '0',
-  },
-};
+export const metadata: Metadata = {
+  title: 'TsunAImi'
+}
 
 export default async function RootLayout({
   children,

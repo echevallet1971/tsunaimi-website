@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import LayoutContent from '../components/LayoutContent';
+import { Metadata } from 'next';
 
 export function generateStaticParams() {
   return [
@@ -21,6 +22,18 @@ async function getMessages(locale: string) {
   } catch (error) {
     notFound();
   }
+}
+
+export async function generateMetadata(
+  { params }: { params: { locale: string } },
+  parent: { metadata: Metadata }
+): Promise<Metadata> {
+  const messages = await getMessages(params.locale);
+  return {
+    ...parent.metadata,
+    title: 'TsunAImi',
+    description: messages.home.hero.headline
+  };
 }
 
 export default async function LocaleLayout(props: LocaleLayoutProps) {

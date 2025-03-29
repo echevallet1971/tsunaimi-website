@@ -11,6 +11,7 @@
         "team": "Meet the Team"
       },
       "ai_agents_submenu": {
+        "overview": "Overview",
         "candidate_mapping": "Candidate Mapping"
       }
     },
@@ -271,6 +272,7 @@
   },
   "ai_agents": {
     "title": "AI Agents",
+    "description": "Discover our suite of AI-powered tools designed to streamline your recruitment process and find the perfect candidates for your team.",
     "candidate_mapping": {
       "title": "Candidate Mapping Agent",
       "description": "Find the perfect candidates for your team",

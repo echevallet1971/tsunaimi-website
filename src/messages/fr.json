@@ -11,6 +11,7 @@
         "team": "L'équipe"
       },
       "ai_agents_submenu": {
+        "overview": "Vue d'ensemble",
         "candidate_mapping": "Mapping des Candidats"
       }
     },
@@ -261,6 +262,7 @@
   },
   "ai_agents": {
     "title": "Agents IA",
+    "description": "Découvrez notre suite d'outils alimentés par l'IA conçus pour optimiser votre processus de recrutement et trouver les candidats parfaits pour votre équipe.",
     "candidate_mapping": {
       "title": "Agent de Mapping des Candidats",
       "description": "Trouvez les candidats parfaits pour votre équipe",

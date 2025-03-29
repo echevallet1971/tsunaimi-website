@@ -25,8 +25,9 @@ export default function Navigation({ locale }: NavigationProps) {
     },
     {
       name: t('ai_agents'),
-      href: '#',
+      href: '/ai-agents',
       submenu: [
+        { name: t('ai_agents_submenu.overview'), href: '/ai-agents' },
         { name: t('ai_agents_submenu.candidate_mapping'), href: '/ai-agents/candidate-mapping' }
       ]
     },

@@ -8,6 +8,8 @@ import SearchForm from './components/SearchForm';
 import SearchResults from './components/SearchResults';
 import SearchStatus from './components/SearchStatus';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 interface SearchState {
   currentQuery: SearchQuery | null;
@@ -23,6 +25,8 @@ interface SearchState {
 
 export default function CandidateMappingPage() {
   const t = useTranslations('ai_agents.candidate_mapping');
+  const router = useRouter();
+  const { isAuthenticated, isLoading } = useAuth();
   const [searchState, setSearchState] = useState<SearchState>({
     currentQuery: null,
     queryId: null,
@@ -34,6 +38,27 @@ export default function CandidateMappingPage() {
     remainingQuota: 100,
     resetTime: Date.now() + 3600000 // 1 hour from now
   });
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  // Show loading state while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#7057A0]"></div>
+      </div>
+    );
+  }
+
+  // Don't render anything if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   // Debounce search input changes
   const debouncedSearch = useDebounce(searchState.currentQuery, 500);
@@ -118,25 +143,21 @@ export default function CandidateMappingPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="h-48 bg-gradient-to-b from-[#7057A0] to-[#251C6B] flex items-center justify-center pt-14">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-          {t('title')}
-        </h1>
-      </div>
-
       {/* Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pt-24 pb-8">
         <div className="max-w-4xl mx-auto">
-          {/* Description */}
-          <div className="mb-12">
-            <p className="text-lg md:text-xl text-[#111827]">
+          {/* Page Header */}
+          <div className="mb-8 border-b border-gray-200 pb-4">
+            <h1 className="text-3xl font-semibold text-[#111827]">
+              {t('title')}
+            </h1>
+            <p className="mt-2 text-base text-[#6B7280]">
               {t('description')}
             </p>
           </div>
 
           {/* Search Form */}
-          <div className="mb-8">
+          <div className="mb-6">
             <SearchForm 
               onSubmit={handleSearch}
               isLoading={searchState.status === "pending" || searchState.status === "running"}
@@ -146,7 +167,7 @@ export default function CandidateMappingPage() {
 
           {/* Search Status */}
           {searchState.queryId && (
-            <div className="mb-8">
+            <div className="mb-6">
               <SearchStatus
                 queryId={searchState.queryId}
                 status={searchState.status}
@@ -167,9 +188,6 @@ export default function CandidateMappingPage() {
           />
         </div>
       </div>
-
-      {/* Visual separator before footer */}
-      <div className="h-24 bg-gradient-to-b from-white to-[#F3F4F6]" />
     </div>
   );
 } 

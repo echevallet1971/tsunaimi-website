@@ -57,7 +57,7 @@ export interface SearchResponse {
 export class ApiClient {
   private token: string | null = null;
 
-  setToken(token: string) {
+  setToken(token: string | null) {
     this.token = token;
   }
 
@@ -104,6 +104,22 @@ export class ApiClient {
     if (endpoint.startsWith('/search/') && !endpoint.includes('/profiles/')) {
       const queryId = endpoint.split('/')[2];
       return generateMockResponse({ query_id: queryId });
+    }
+
+    if (endpoint === '/auth/token' && options.method === 'POST') {
+      const formData = new URLSearchParams(options.body as string);
+      const email = formData.get('username');
+      const password = formData.get('password');
+
+      // Mock authentication logic
+      if (email === 'test@example.com' && password === 'password') {
+        return {
+          access_token: 'mock_access_token',
+          refresh_token: 'mock_refresh_token'
+        };
+      } else {
+        throw new Error('Invalid credentials');
+      }
     }
 
     throw new Error('Mock endpoint not implemented');

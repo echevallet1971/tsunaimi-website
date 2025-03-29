@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import NavigationClient from './NavigationClient';
 import MenuPanel from './MenuPanel';
 import FooterWrapper from './FooterWrapper';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 interface LayoutContentProps {
   locale: string;
@@ -39,21 +40,24 @@ export default function LayoutContent({ locale, messages, children }: LayoutCont
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="Europe/Paris">
-      <NavigationClient 
-        locale={locale} 
-        navigation={navigation}
-        isMenuOpen={isMenuOpen}
-        onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
-      />
-      <main>
-        {children}
-      </main>
-      <FooterWrapper locale={locale} messages={messages} />
-      <MenuPanel 
-        isOpen={isMenuOpen} 
-        onClose={() => setIsMenuOpen(false)} 
-        navigation={navigation} 
-      />
+      <AuthProvider>
+        <NavigationClient 
+          locale={locale} 
+          navigation={navigation}
+          isMenuOpen={isMenuOpen}
+          onMenuToggle={() => setIsMenuOpen(!isMenuOpen)}
+        />
+        <main>
+          {children}
+        </main>
+        <MenuPanel 
+          isOpen={isMenuOpen} 
+          onClose={() => setIsMenuOpen(false)}
+          navigation={navigation}
+          locale={locale}
+        />
+        <FooterWrapper locale={locale} messages={messages} />
+      </AuthProvider>
     </NextIntlClientProvider>
   );
 } 

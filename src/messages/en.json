@@ -5,6 +5,10 @@
       "about": "About Us",
       "contact": "Contact",
       "ai_agents": "AI Agents",
+      "login": "Login",
+      "logout": "Logout",
+      "logging_in": "Logging in...",
+      "logging_out": "Logging out...",
       "about_submenu": {
         "manifesto": "Manifesto",
         "story": "Our Story",
@@ -330,6 +334,34 @@
         "timeout": "Request timed out. Please try again.",
         "unknown": "An unexpected error occurred. Please try again."
       }
+    }
+  },
+  "login": {
+    "title": "Sign in to your account",
+    "subtitle": "Please enter your credentials to continue",
+    "field": {
+      "email": "Email address",
+      "password": "Password"
+    },
+    "form": {
+      "submit": "Sign in",
+      "error": "Please fix the errors in the form",
+      "error_invalid_credentials": "Invalid email or password",
+      "validation": {
+        "email": "Please enter a valid email address",
+        "password": "Password must be at least 8 characters long",
+        "required": "Please enter your {field}"
+      }
+    }
+  },
+  "Login": {
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "error": {
+      "invalidCredentials": "Invalid email or password"
     }
   }
 } 

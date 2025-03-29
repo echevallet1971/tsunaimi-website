@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import LanguageSwitcher from './LanguageSwitcher';
+import LoginButton from './LoginButton';
 
 interface NavigationItem {
   name: string;
@@ -15,9 +17,10 @@ interface MenuPanelProps {
   isOpen: boolean;
   onClose: () => void;
   navigation: NavigationItem[];
+  locale: string;
 }
 
-export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProps) {
+export default function MenuPanel({ isOpen, onClose, navigation, locale }: MenuPanelProps) {
   const handleLinkClick = () => {
     onClose();
   };
@@ -50,7 +53,7 @@ export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProp
           </div>
 
           {/* Menu content */}
-          <div className="flex-1 px-8 py-4 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto px-4">
             {navigation.map((item) => (
               item.submenu ? (
                 <div key={item.name} className="mb-4">
@@ -82,18 +85,12 @@ export default function MenuPanel({ isOpen, onClose, navigation }: MenuPanelProp
               )
             ))}
 
-            {/* Contact Info */}
-            <div className="mt-4">
-              <a 
-                href="mailto:contact@tsunaimi.ai"
-                className="inline-flex items-center text-[#7057A0] hover:text-[#251C6B] transition-colors"
-                onClick={handleLinkClick}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
-                contact@tsunaimi.ai
-              </a>
+            {/* Mobile-only options */}
+            <div className="mt-8 pt-8 border-t border-[#E5E7EB]">
+              <div className="flex flex-col gap-4">
+                <LoginButton locale={locale} onClick={handleLinkClick} className="text-xl font-semibold" />
+                <LanguageSwitcher locale={locale} className="text-xl font-semibold" />
+              </div>
             </div>
           </div>
         </div>

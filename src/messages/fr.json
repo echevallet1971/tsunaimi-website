@@ -5,6 +5,10 @@
       "about": "À propos",
       "contact": "Contact",
       "ai_agents": "Agents IA",
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "logging_in": "Connexion en cours...",
+      "logging_out": "Déconnexion en cours...",
       "about_submenu": {
         "manifesto": "Manifeste",
         "story": "Notre Histoire",
@@ -320,6 +324,16 @@
         "timeout": "La requête a expiré. Veuillez réessayer.",
         "unknown": "Une erreur inattendue s'est produite. Veuillez réessayer."
       }
+    }
+  },
+  "Login": {
+    "email": "Email",
+    "password": "Mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion en cours...",
+    "error": {
+      "invalidCredentials": "Email ou mot de passe invalide"
     }
   }
 } 

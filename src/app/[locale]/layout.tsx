@@ -11,9 +11,9 @@ export function generateStaticParams() {
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 async function getMessages(locale: string) {
@@ -25,10 +25,11 @@ async function getMessages(locale: string) {
 }
 
 export async function generateMetadata(
-  { params }: { params: { locale: string } },
+  { params }: { params: Promise<{ locale: string }> },
   parent: { metadata: Metadata }
 ): Promise<Metadata> {
-  const messages = await getMessages(params.locale);
+  const { locale } = await params;
+  const messages = await getMessages(locale);
   return {
     ...parent.metadata,
     title: 'TsunAImi',
@@ -38,7 +39,7 @@ export async function generateMetadata(
 
 export default async function LocaleLayout(props: LocaleLayoutProps) {
   const { children, params } = props;
-  const locale = params.locale;
+  const { locale } = await params;
   const messages = await getMessages(locale);
 
   return (

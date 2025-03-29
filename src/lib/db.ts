@@ -81,19 +81,19 @@ export async function getPool(): Promise<Pool> {
 }
 
 export async function query<T>(text: string, params?: any[]): Promise<T[]> {
-  const pool = await getPool();
+  const currentPool = await getPool();
+  const client = await currentPool.connect();
   try {
-    const result = await pool.query(text, params);
+    const result = await client.query(text, params);
     return result.rows;
-  } catch (error) {
-    console.error('Error executing query:', error);
-    throw error;
+  } finally {
+    client.release();
   }
 }
 
 export async function transaction<T>(callback: (client: any) => Promise<T>): Promise<T> {
-  const pool = await getPool();
-  const client = await pool.connect();
+  const currentPool = await getPool();
+  const client = await currentPool.connect();
 
   try {
     await client.query('BEGIN');
@@ -105,6 +105,17 @@ export async function transaction<T>(callback: (client: any) => Promise<T>): Pro
     throw error;
   } finally {
     client.release();
+  }
+}
+
+// Test the database connection
+export async function testConnection(): Promise<boolean> {
+  try {
+    await query('SELECT NOW()');
+    return true;
+  } catch (error) {
+    console.error('Database connection error:', error);
+    return false;
   }
 }
 

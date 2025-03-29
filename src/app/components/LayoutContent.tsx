@@ -26,6 +26,13 @@ export default function LayoutContent({ locale, messages, children }: LayoutCont
         { name: messages.common.nav.about_submenu.team, href: `/${locale}/team` }
       ]
     },
+    {
+      name: messages.common.nav.ai_agents,
+      href: '#',
+      submenu: [
+        { name: messages.common.nav.ai_agents_submenu.candidate_mapping, href: `/${locale}/ai-agents/candidate-mapping` }
+      ]
+    },
     { name: messages.common.nav.contact, href: `/${locale}/contact` }
   ];
 

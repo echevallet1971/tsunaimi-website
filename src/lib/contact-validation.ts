@@ -17,7 +17,7 @@ export const validatePhoneNumber = (phone: string): boolean => {
     return phoneRegex.test(phone);
 };
 
-export function validateRequiredFields(data: {
+interface ContactFormData {
     name: string;
     email: string;
     company: string;
@@ -25,34 +25,44 @@ export function validateRequiredFields(data: {
     interest: string;
     message: string;
     phone_number?: string;
-}): { isValid: boolean; message?: string } {
-    // Check for empty or whitespace-only values in required fields
+}
+
+interface ValidationResult {
+    isValid: boolean;
+    message: string;
+}
+
+export function validateRequiredFields(data: ContactFormData): ValidationResult {
     const requiredFields = ['name', 'email', 'company', 'role', 'interest', 'message'];
+    
     for (const field of requiredFields) {
-        const value = data[field as keyof typeof data];
-        if (!value || value.trim().length === 0) {
+        if (!data[field as keyof ContactFormData]?.trim()) {
             return {
                 isValid: false,
-                message: `${field.charAt(0).toUpperCase() + field.slice(1)} is required.`
+                message: `${field.charAt(0).toUpperCase() + field.slice(1)} is required`
             };
         }
     }
 
     // Validate email format
-    if (!validateEmail(data.email)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
         return {
             isValid: false,
-            message: 'Please enter a valid email address (e.g., user@domain.com).'
+            message: 'Please enter a valid email address'
         };
     }
 
     // Validate phone number if provided
-    if (data.phone_number && !validatePhoneNumber(data.phone_number)) {
-        return {
-            isValid: false,
-            message: 'Please enter a valid international phone number (e.g., +33 1 23 45 67 89).'
-        };
+    if (data.phone_number) {
+        const phoneRegex = /^\+?[\d\s-()]+$/;
+        if (!phoneRegex.test(data.phone_number)) {
+            return {
+                isValid: false,
+                message: 'Please enter a valid phone number'
+            };
+        }
     }
 
-    return { isValid: true };
+    return { isValid: true, message: '' };
 } 

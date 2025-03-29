@@ -4,10 +4,14 @@
       "home": "Accueil",
       "about": "À propos",
       "contact": "Contact",
+      "ai_agents": "Agents IA",
       "about_submenu": {
         "manifesto": "Manifeste",
         "story": "Notre Histoire",
         "team": "L'équipe"
+      },
+      "ai_agents_submenu": {
+        "candidate_mapping": "Mapping des Candidats"
       }
     },
     "language": {
@@ -252,6 +256,67 @@
             "2": "Jamais d'impro. Toujours aligné."
           }
         }
+      }
+    }
+  },
+  "ai_agents": {
+    "title": "Agents IA",
+    "candidate_mapping": {
+      "title": "Agent de Mapping des Candidats",
+      "description": "Trouvez les candidats parfaits pour votre équipe",
+      "search": "Rechercher",
+      "searching": "Recherche en cours...",
+      "results": "Résultats de la Recherche",
+      "no_results": "Aucun résultat trouvé",
+      "view_profile": "Voir le Profil LinkedIn",
+      "relevance_score": "Score de Pertinence",
+      "query_id": "ID de la Requête",
+      "max_results": "Résultats Maximum",
+      "sort_by": "Trier Par",
+      "sort_order": "Ordre de Tri",
+      "add_criteria": "Ajouter un Critère",
+      "remove_criteria": "Supprimer",
+      "search_placeholder": "Entrez une valeur de recherche",
+      "status": {
+        "idle": "Prêt à Rechercher",
+        "pending": "Initialisation de la Recherche",
+        "running": "Recherche en Cours",
+        "completed": "Recherche Terminée",
+        "failed": "Échec de la Recherche"
+      },
+      "total_results": "Total des Résultats",
+      "execution_time": "Temps d'Exécution",
+      "fields": {
+        "keywords": "Mots-clés",
+        "title": "Titre du Poste",
+        "company": "Entreprise",
+        "location": "Localisation",
+        "industry": "Secteur"
+      },
+      "operators": {
+        "contains": "Contient",
+        "equals": "Égal à",
+        "starts_with": "Commence par",
+        "ends_with": "Se termine par"
+      },
+      "sort": {
+        "relevance": "Pertinence",
+        "name": "Nom",
+        "title": "Titre",
+        "company": "Entreprise",
+        "location": "Localisation",
+        "ascending": "Croissant",
+        "descending": "Décroissant"
+      },
+      "remaining_quota": "Quota Restant",
+      "rate_limit_exceeded": "Limite de requêtes atteinte. Veuillez réessayer plus tard.",
+      "rate_limit_reset": "La limite sera réinitialisée dans {time}",
+      "error": {
+        "rate_limit": "Vous avez atteint la limite de requêtes. Veuillez réessayer plus tard.",
+        "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer.",
+        "server": "Erreur serveur. Veuillez réessayer plus tard.",
+        "timeout": "La requête a expiré. Veuillez réessayer.",
+        "unknown": "Une erreur inattendue s'est produite. Veuillez réessayer."
       }
     }
   }

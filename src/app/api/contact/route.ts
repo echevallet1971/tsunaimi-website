@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
-import { validateRequiredFields } from '@/lib/contact-validation';
+import { validateRequiredFields } from '../../../lib/contact-validation';
 import { validateContactSubmission } from './validation';
-import { query } from '@/lib/db';
+import { query } from '../../../lib/db';
 
 interface ContactFormData {
   name: string;

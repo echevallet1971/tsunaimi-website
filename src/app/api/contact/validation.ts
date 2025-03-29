@@ -10,44 +10,38 @@ export interface ValidationResponse {
     };
 }
 
-export async function validateContactSubmission(email: string): Promise<ValidationResponse> {
-    try {
-        // Check if there's a recent submission from this email (within last 5 minutes)
-        const recentSubmission = await query<{ count: string }>(
-            `SELECT COUNT(*) as count 
-             FROM contact_submissions 
-             WHERE email = $1 
-             AND created_at > NOW() - INTERVAL '5 minutes'`,
-            [email]
-        );
+interface ValidationResult {
+  isValid: boolean;
+  message: string;
+}
 
-        if (parseInt(recentSubmission[0].count) > 0) {
-            return {
-                isValid: false,
-                message: 'We have received your previous inquiry and our team will get back to you shortly.',
-                error: { type: 'rate_limit' }
-            };
-        }
+// Simple in-memory rate limiting
+const submissionCounts = new Map<string, { count: number; timestamp: number }>();
+const RATE_LIMIT = 5; // Maximum submissions per hour
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
 
-        return { isValid: true };
-    } catch (error) {
-        console.error('Error validating contact submission:', error);
-        
-        if (error instanceof DatabaseError) {
-            return {
-                isValid: false,
-                message: 'Database connection error. Please try again later.',
-                error: { 
-                    type: 'database',
-                    code: error.code
-                }
-            };
-        }
+export async function validateContactSubmission(email: string): Promise<ValidationResult> {
+  const now = Date.now();
+  const submission = submissionCounts.get(email);
 
-        return {
-            isValid: false,
-            message: 'An error occurred while validating your submission. Please try again.',
-            error: { type: 'unknown' }
-        };
+  if (submission) {
+    // Check if the window has expired
+    if (now - submission.timestamp > RATE_LIMIT_WINDOW) {
+      // Reset the count if the window has expired
+      submissionCounts.set(email, { count: 1, timestamp: now });
+    } else if (submission.count >= RATE_LIMIT) {
+      return {
+        isValid: false,
+        message: 'Too many submissions. Please try again later.'
+      };
+    } else {
+      // Increment the count
+      submission.count++;
     }
+  } else {
+    // First submission
+    submissionCounts.set(email, { count: 1, timestamp: now });
+  }
+
+  return { isValid: true, message: '' };
 } 

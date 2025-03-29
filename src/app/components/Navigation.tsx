@@ -23,6 +23,13 @@ export default function Navigation({ locale }: NavigationProps) {
         { name: t('about_submenu.team'), href: '/team' }
       ]
     },
+    {
+      name: t('ai_agents'),
+      href: '#',
+      submenu: [
+        { name: t('ai_agents_submenu.candidate_mapping'), href: '/ai-agents/candidate-mapping' }
+      ]
+    },
     { name: t('contact'), href: '/contact' }
   ];
 

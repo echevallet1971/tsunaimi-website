@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const withNextIntl = require('next-intl/plugin')('./src/i18n/request.ts');
-
 const nextConfig = {
   // Remove static export to enable API routes
   // output: 'export',
@@ -52,6 +50,6 @@ const nextConfig = {
       },
     ];
   },
-}
+};
 
-module.exports = withNextIntl(nextConfig); 
+module.exports = nextConfig;

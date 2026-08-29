@@ -1,48 +1,20 @@
-import createIntlMiddleware from 'next-intl/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-// Create the intl middleware
-const intlMiddleware = createIntlMiddleware({
-  // Configure the supported locales
-  locales: ['en', 'fr'],
-  
-  // Use English as the default locale
-  defaultLocale: 'en',
-
-  // Always require locale prefix
-  localePrefix: 'always'
-});
-
-// List of paths that should show the coming soon page
-const COMING_SOON_PATHS = [
-  '/vision',
-  '/team',
-  '/approach',
-];
 
 // Main middleware function
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
-  // First, handle internationalization
-  const intlResponse = intlMiddleware(request);
-  
-  // If intl middleware returned a redirect response, return it immediately
-  if (intlResponse instanceof NextResponse && intlResponse.status !== 200) {
-    return intlResponse;
-  }
 
-  // Handle coming soon redirects
-  const locale = pathname.match(/^\/[a-z]{2}(?=\/|$)/)?.[0]?.slice(1) || 'en';
-  const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}/, '');
-  
-  const isComingSoonPath = COMING_SOON_PATHS.some(path => 
-    pathWithoutLocale.includes(path)
-  );
-  
-  if (isComingSoonPath) {
-    return NextResponse.redirect(new URL(`/${locale}/coming-soon`, request.url));
+  // Redirect legacy locale routes to the single landing page.
+  if (
+    pathname === '/en' ||
+    pathname.startsWith('/en/') ||
+    pathname === '/fr' ||
+    pathname.startsWith('/fr/')
+  ) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = '/';
+    return NextResponse.redirect(redirectUrl, 308);
   }
 
   // Continue with the request

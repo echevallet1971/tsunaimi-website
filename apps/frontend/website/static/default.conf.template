@@ -1,0 +1,27 @@
+server {
+    listen ${FRONTEND_PORT_INTERNAL};
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location = /en {
+        return 308 /;
+    }
+
+    location ^~ /en/ {
+        return 308 /;
+    }
+
+    location = /fr {
+        return 308 /;
+    }
+
+    location ^~ /fr/ {
+        return 308 /;
+    }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

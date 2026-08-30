@@ -1,0 +1,41 @@
+system_version: v0.6.3
+date: 2026-08-30
+components:
+  frontend:
+    tsunaimi-website: v0.6.3
+
+notes: |
+  Release Notes 0.6.3
+   - Added version number to the website
+
+  Release Notes 0.6.2
+   - Optimized the website for SEO
+
+  Release Notes 0.6.1
+   - Fixed Ask My Envoy URL to https://askmyenvoy.com
+
+  Release Notes 0.6.0
+   - Removed TsunAImi narrative from the website
+   - Added focus on Ask My Envoy
+
+  Release Notes 0.5.12
+   - CVE-2025-66478 (React2Shell RCE) - PATCHED
+
+  Release Notes 0.5.11
+   - Added release notes to Agentic Platform page
+
+  Release Notes 0.5.10
+   - Updated AI Agents page with new content
+
+  Release Notes 0.5.9
+   - Updated home page with new content
+
+  Release Notes 0.5.8
+   - Fixed target environment based on runtime environment variable and not baked into image.
+
+  Release Notes 0.5.7
+   - Fixed navigations
+   - Removed contact form code to make the website pure marketing website
+
+  Release Notes 0.5.6
+   - Updated home page with platform narrative

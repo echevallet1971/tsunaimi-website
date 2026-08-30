@@ -1,6 +1,8 @@
 server {
     listen ${FRONTEND_PORT_INTERNAL};
     server_name _;
+    absolute_redirect off;
+    port_in_redirect off;
 
     root /usr/share/nginx/html;
     index index.html;
@@ -19,6 +21,16 @@ server {
 
     location ^~ /fr/ {
         return 308 /;
+    }
+
+    location = /sw.js {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        return 410;
+    }
+
+    location = /service-worker.js {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        return 410;
     }
 
     location / {

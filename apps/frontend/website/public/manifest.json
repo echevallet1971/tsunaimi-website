@@ -1,7 +1,7 @@
 {
   "name": "TsunAImi",
   "short_name": "TsunAImi",
-  "description": "Agentic AI Solutions",
+  "description": "The project that led to Ask My Envoy.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -3,8 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TsunAImi | Ask My Envoy</title>
-    <meta name="description" content="TsunAImi was where this started." />
+    <title>TsunAImi | The project that led to Ask My Envoy</title>
+    <meta name="description" content="TsunAImi was the agentic AI project that led to Ask My Envoy, a platform built to remove the manual coordination behind scheduling meetings." />
+    <link rel="canonical" href="https://tsunaimi.ai/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tsunaimi.ai/" />
+    <meta property="og:title" content="TsunAImi | The project that led to Ask My Envoy" />
+    <meta property="og:description" content="TsunAImi was the agentic AI project that led to Ask My Envoy, a platform built to remove the manual coordination behind scheduling meetings." />
+    <meta property="og:image" content="https://tsunaimi.ai/logo-full.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TsunAImi | The project that led to Ask My Envoy" />
+    <meta name="twitter:description" content="TsunAImi was the agentic AI project that led to Ask My Envoy, a platform built to remove the manual coordination behind scheduling meetings." />
+    <meta name="twitter:image" content="https://tsunaimi.ai/logo-full.png" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/styles.css" />

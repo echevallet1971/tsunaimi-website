@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TsunAImi | Ask My Envoy</title>
+    <meta name="description" content="TsunAImi was where this started." />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="container header-inner">
+          <img class="brand-logo-header" src="/logo-full.png" alt="TsunAImi Logo" />
+        </div>
+      </header>
+
+      <main class="hero">
+        <section class="hero-content">
+          <h1>TsunAImi was where Ask My Envoy started.</h1>
+          <p>
+            What began as an experiment in building agentic systems eventually
+            became a much more focused product: Ask My Envoy.
+          </p>
+          <p>
+            Today, all development is focused on one problem: removing the
+            manual coordination behind meetings.
+          </p>
+          <a
+            class="cta"
+            href="${NEXT_PUBLIC_ASK_MY_ENVOY_URL}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Discover Ask My Envoy →
+          </a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <div class="footer-top">
+            <div class="footer-left">
+              <img class="brand-logo-footer" src="/logo-full.png" alt="TsunAImi Logo" />
+              <p>The project that led to Ask My Envoy.</p>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            © 2026 TsunAImi. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

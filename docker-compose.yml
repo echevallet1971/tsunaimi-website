@@ -4,6 +4,10 @@ services:
       context: ./apps/frontend/website
       dockerfile: Dockerfile
       target: development
+      args:
+        - NEXT_PUBLIC_ASK_MY_ENVOY_URL=${NEXT_PUBLIC_ASK_MY_ENVOY_URL}
+    environment:
+      - NEXT_PUBLIC_ASK_MY_ENVOY_URL=${NEXT_PUBLIC_ASK_MY_ENVOY_URL}
     networks:
       - shared-network
 

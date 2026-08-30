@@ -94,6 +94,15 @@ jspm_packages/
 tmp/
 temp/
 
+# Static-website mode: not needed in image build
+src/
+package.json
+package-lock.json
+next.config.js
+tsconfig.json
+tailwind.config.ts
+postcss.config.js
+
 # Docker files (don't copy Docker files into Docker)
 Dockerfile*
 docker-compose*

@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #ffffff;
+  color: #111827;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid #d1d5db;
+  box-shadow: 0 2px 12px rgba(17, 24, 39, 0.08);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-inner {
+  height: 76px;
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo-header {
+  width: 148px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.brand-logo-footer {
+  width: 126px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 128px 16px 64px;
+  background: linear-gradient(180deg, #7057a0 0%, #251c6b 100%);
+}
+
+.hero-content {
+  max-width: 760px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.hero h1 {
+  margin: 0 0 24px;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.hero p {
+  margin: 0 0 24px;
+  font-size: clamp(1.05rem, 2.4vw, 1.85rem);
+  line-height: 1.45;
+  color: #e5e7eb;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 16px 32px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #251c6b;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.site-footer {
+  background: #ffffff;
+  padding: 20px 0;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-left {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: left;
+}
+
+.footer-left p {
+  margin: 0;
+  color: #251c6b;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.footer-bottom {
+  margin-top: 16px;
+  border-top: 1px solid #a5b4fc;
+  padding-top: 12px;
+  text-align: center;
+  color: #251c6b;
+  font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+  .header-inner {
+    height: 84px;
+  }
+
+  .brand-logo-header {
+    width: 172px;
+    height: 66px;
+  }
+
+  .brand-logo-footer {
+    width: 146px;
+    height: 56px;
+  }
+
+  .hero {
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .footer-top {
+    justify-content: flex-start;
+  }
+
+  .footer-left {
+    gap: 14px;
+  }
+}

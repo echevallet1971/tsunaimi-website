@@ -20,6 +20,7 @@ services:
       - NEXT_PUBLIC_APP_ENV=production  # Explicitly set the app environment
       - HOST=0.0.0.0 # Allow Next.js server to be accessed from outside the container
       - NEXT_PUBLIC_ASK_MY_ENVOY_URL=${NEXT_PUBLIC_ASK_MY_ENVOY_URL}  # Runtime Ask My Envoy URL
+      - VERSION=${VERSION}
     ports:
       - "${FRONTEND_PORT_EXTERNAL}:${FRONTEND_PORT_INTERNAL}"
     networks:

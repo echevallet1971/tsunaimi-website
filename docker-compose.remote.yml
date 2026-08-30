@@ -21,6 +21,7 @@ services:
     environment:
       - NEXT_PUBLIC_APP_ENV=production  # Explicitly set the app environment
       - HOST=0.0.0.0 # Allow Next.js server to be accessed from outside the container
+      - VERSION=${VERSION}
     ports:
       - "${FRONTEND_PORT_EXTERNAL}:${FRONTEND_PORT_INTERNAL}"
     networks:

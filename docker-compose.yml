@@ -8,6 +8,7 @@ services:
         - NEXT_PUBLIC_ASK_MY_ENVOY_URL=${NEXT_PUBLIC_ASK_MY_ENVOY_URL}
     environment:
       - NEXT_PUBLIC_ASK_MY_ENVOY_URL=${NEXT_PUBLIC_ASK_MY_ENVOY_URL}
+      - VERSION=${VERSION}
     networks:
       - shared-network
 
